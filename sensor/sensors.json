@@ -1,0 +1,50 @@
+[
+    {
+        "id": "sensor-1",
+        "data": {
+            "name": "Temperature 1",
+            "latitude": 37.692625,
+            "longitude": -122.200682
+        }
+    },
+    {
+        "id": "sensor-2",
+        "data": {
+            "name": "Temperature 2",
+            "latitude": 37.612215,
+            "longitude": -122.162933
+        }
+    },
+    {
+        "id": "sensor-3",
+        "data": {
+            "name": "Temperature 3",
+            "latitude": 37.602464,
+            "longitude": -122.338036   
+        }
+    },
+    {
+        "id": "sensor-4",
+        "data": {
+            "name": "Temperature 4",
+            "latitude": 37.66228,
+            "longitude": -122.36549            
+        }
+    },
+    {
+        "id": "sensor-5",
+        "data": {
+            "name": "Temperature 5",
+            "latitude": 37.751372,
+            "longitude": -122.359999            
+        }
+    },
+    {
+        "id": "sensor-6",
+        "data": {
+            "name": "Temperature 6",
+            "latitude": 37.800307,
+            "longitude": -122.354788   
+        }
+    }
+  ]
