@@ -14,7 +14,7 @@ Click on a sensor to view the detailed values received in realtime from that spe
 
 ![Image description](images/architecture.jpg)
 
-1. The sensor component is developed with the AWS IoT Device SDK for Javascript.  The sensor is registered as a Thing in IoT Core and publishes a random temperature in a JSON payload to the Cloud every 2 seconds.
+1. The sensor component is developed with the AWS IoT Device SDK for Javascript.  The sensor is registered as a Thing in IoT Core and publishes random temperature values for six sensors in a JSON payload to the Cloud every 2 seconds.
 
 2. A rule in IoT Core subscribes to the message topic and forwards the JSON payload to a Lambda function.
 
