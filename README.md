@@ -61,9 +61,6 @@ When you select your profile, make sure to select the same profile you used when
 
 Amplify will then begin to provision your account for the project deployment.
 
-```
-? Do you want to configure Lambda Triggers for Cognito? (Y/n) n
-```
 Once your account has been provisioned, entering the 'amplify status' command will show you the resources Amplify will create in your account:
 
 ```
@@ -136,7 +133,7 @@ From the sensor terminal window:
 ```
 $ node index.js
 ```
-You will see output from the app as it connects to IoT Core and publishes new temperature messages every 2 seconds.
+You will see output from the app as it connects to IoT Core and publishes new messages for six sensors every two seconds.
 
 ```
 published to topic cmd/sensors/sensor-1/sensor-create {"status":1,"value":0,"timestamp":1570562143384}
@@ -154,11 +151,11 @@ Switch back to the terminal window pointing to the **root** folder and run:
 ```
 $ npm start
 ```
-This will launch the application in your machine's default browser.
+This will launch the application in your machine's default web browser.
 
 **Sign-up and Sign-in**
 
-The web app requires users to authenticate via Cognito.  The first screen you will see is a logon screen.  Tap the **Sign Up** link and then tap the link to **Create account** and create a new account using your email address.
+The web app requires users to authenticate via Cognito.  The first screen you will see is a logon screen.  Click the **Create account** link and create a new account using your email address.
 
 Cognito will then email you a confirmation code.  Enter this code into the subsequent confirmation screen and logon to the app with your credentials.
 
