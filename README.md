@@ -1,8 +1,19 @@
 # aws-appsync-iot-core-realtime-dashboard
 
-This application demonstrates a web application dashboard receiving real-time updates from a series of IoT sensors.  The solution is built with AWS AppSync and AWS IoT Core technologies.
+This application demonstrates a web application dashboard receiving real-time updates from a series of IoT sensors.  It depicts a fictitious series of temperature sensors deployed around the San Francisco Bay. The solution is built with React, AWS AppSync, and AWS IoT Core technologies.
+
+![Image description](images/map.jpg)
+
+The sensors are represented as the colored dots.  Their color will fluxuate between red, green, and yellow based on the messages received from the sensors.
+
+Click on a sensor to view the detailed values received in realtime from that specific sensor.
+
+![Image description](images/sensor.jpg)
 
 ## Architecture
+
+![Image description](images/architecture.jpg)
+
 1. The sensor component is developed with the AWS IoT Device SDK for Javascript.  The sensor is registered as a Thing in IoT Core and publishes a random temperature in a JSON payload to the Cloud every 2 seconds.
 
 2. A rule in IoT Core subscribes to the message topic and forwards the JSON payload to a Lambda function.
