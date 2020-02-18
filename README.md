@@ -1,6 +1,6 @@
 # aws-appsync-iot-core-realtime-dashboard
 
-This application demonstrates a web application dashboard receiving real-time updates from a series of IoT sensors.  It depicts a fictitious series of temperature sensors deployed around the San Francisco Bay. The solution is built with React, AWS AppSync, and AWS IoT Core technologies.
+This application demonstrates a web application dashboard receiving real-time updates from a series of IoT sensors.  It depicts a fictitious set of temperature sensors deployed around the San Francisco Bay. The solution is built with React, AWS AppSync, and AWS IoT Core technologies.
 
 ![Image description](images/map.jpg)
 
@@ -74,9 +74,9 @@ $ amplify push
 
 ? Do you want to update code for your updated GraphQL API (Y/n) Y
 
-? Do you want to generate GraphQL statements (queries, mutations and subscription) based on your schema types? This will overwrite your current graphql queries, mutations and subscriptions (Y/n) Y
+? This will overwrite your current graphql queries, mutations and subscriptions Y
 ```
-You will then see a series of output as Amplify builds and deploys the app's CloudFormation Templates, creating the app infrastucture in your AWS account. 
+You will then see a series of output messages as Amplify builds and deploys the app's CloudFormation Templates, creating the app infrastucture in your AWS account. 
 
 Resources being created in your account include:
 
@@ -96,6 +96,7 @@ $ npm install
 
 This application uses maps from [Mapbox](https://www.mapbox.com/) to display the sensor locations.  You must create an account and request a free ***default access token***.  Once you have the token, update the ***src/settings.json*** file with the token value.
 
+***src/settings.json***
 ```
 {
     "mapboxApiAccessToken": "your-token-here"
