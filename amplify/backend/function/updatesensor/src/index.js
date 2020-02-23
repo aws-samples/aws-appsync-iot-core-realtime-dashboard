@@ -54,10 +54,13 @@ exports.handler = async (event) => {
 
     //set the status based on the current value
     let status = 1;
-    if (event.data.value >= 100) {
+    
+    if (event.data.value < 5 || event.data.value > 9) {
         status = 3;
-    } else if (event.data.value >= 80){
+    } else if (event.data.value >= 5 && event.data.value <= 6){
         status = 2;
+    } else if (event.data.value >= 8 && event.data.value <= 9){
+      status = 2;
     }
 
     //execute the mutation

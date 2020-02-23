@@ -66,7 +66,7 @@ const NumericWidget: React.FC<IProps> = ({mode, title, value}: IProps) => {
       newValues.current = value;
       newValues.count = newValues.count + 1;
       newValues.total = newValues.total + value;
-      newValues.avg = Math.round(newValues.total / newValues.count);
+      newValues.avg = parseFloat((newValues.total / newValues.count).toFixed(1));
 
       if (value > newValues.max) {
         newValues.max = value;

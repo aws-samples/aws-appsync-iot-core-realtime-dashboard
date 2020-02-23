@@ -48,7 +48,9 @@ function sendSensorState() {
 
     sensors.forEach(item => {
 
-        msg.value = 75 + Math.floor((Math.random() * (40 - 1) + 1));
+        msg.value = 20 + Math.floor((Math.random() * (80 - 1) + 1));
+        msg.value = (msg.value / 10);
+
         msg.timestamp = new Date().getTime();
     
         var topic = VALUE_TOPIC.replace('[id]', item.id);
