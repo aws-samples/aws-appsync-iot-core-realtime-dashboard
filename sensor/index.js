@@ -36,7 +36,7 @@ device.on('connect', function() {
     })
 
 
-    //publish new temperature readings very 2 seconds
+    //publish new value readings very 2 seconds
     setInterval(sendSensorState, VALUE_RATE);
 });
 
