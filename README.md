@@ -31,6 +31,7 @@ Click on a sensor to view the detailed values received in realtime from that spe
 2. [Node JS](https://nodejs.org/en/download/) (^10.0) with NPM (^5.2)
 
 3. [Amplify CLI](https://aws-amplify.github.io/docs/) (^4.0.0).
+4. A [Mapbox](https://www.mapbox.com/) account with a free *Default Public Access Token*
 
 After you have installed and configured Amplify, take note of the AWS profile you selected during the configuration.  If you created a profile other than **default**, you will need the profile name for later steps in the deployment.
 
@@ -92,7 +93,7 @@ Resources being created in your account include:
 $ npm install
 ```
 
-**Obtain and Configure Mapbox API key**
+**Configure Mapbox API key**
 
 This application uses maps from [Mapbox](https://www.mapbox.com/) to display the sensor locations.  You must create an account and request a free ***default access token***.  Once you have the token, update the ***src/settings.json*** file with the token value.
 
