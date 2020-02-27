@@ -9,7 +9,7 @@ var sensors = require('./sensors.json');
 //constants used in the application
 const VALUE_TOPIC = "dt/sensors/[id]/sensor-value"; //topic to which sensor values will be published
 const CREATE_TOPIC =  "cmd/sensors/[id]/sensor-create"; //topic to which the create sensor request will be published
-const VALUE_RATE = 2000; //rate in milliseconds new temperature values will be published to the Cloud
+const VALUE_RATE = 2000; //rate in milliseconds new values will be published to the Cloud
 
 //initialize the IOT device
 var device = awsIot.device(settings);
