@@ -18,7 +18,7 @@ Click on a sensor to view the detailed values received in realtime from that spe
 
 2. A rule in IoT Core subscribes to the message topic and forwards the JSON payload to a Lambda function.
 
-3. The Node js Lambda function executes a GraphQL mutatation in AppSync.  The mutation saves the latest value for the sensor in DynamoDB and broadcasts the latest value in real-time to the iOS application. The Lambda function uses an IAM role and policy to obtain permissions to interact with AppSync.
+3. The Node js Lambda function executes a GraphQL mutatation in AppSync.  The mutation saves the latest value for the sensor in DynamoDB and broadcasts the latest value in real-time to the web dashboard. The Lambda function uses an IAM role and policy to obtain permissions to interact with AppSync.
 
 4. The React web dashboard application is written in Typescript and subscribes to the AppSync sensor update subscriptions.  When new  values are received, the map on the screen is updated in real-time to reflect the new sensor values. The application uses Cognito to authenticate users and allow them to perform the AppSync subscription. 
 
