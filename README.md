@@ -113,7 +113,7 @@ Install the Node js packages, and run the Node js app to create your sensor as a
 ```
 $ cd sensor
 $ npm install
-$ node create-sensor.js
+$ node create-sensors.js
 ```
 
 *Note - this will create the sensor using your default AWS profile account and region.  If you have not specified a default region in your local AWS configuration, it will default to us-east-1.
