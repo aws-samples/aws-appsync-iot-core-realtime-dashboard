@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
 export type CreateSensorInput = {
@@ -145,6 +146,8 @@ export type CreateSensorMutation = {
     longitude: number,
     status: number,
     timestamp: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -163,6 +166,8 @@ export type UpdateSensorMutation = {
     longitude: number,
     status: number,
     timestamp: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -181,6 +186,8 @@ export type DeleteSensorMutation = {
     longitude: number,
     status: number,
     timestamp: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -198,6 +205,8 @@ export type GetSensorQuery = {
     longitude: number,
     status: number,
     timestamp: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -219,6 +228,8 @@ export type ListSensorsQuery = {
       longitude: number,
       status: number,
       timestamp: number,
+      createdAt: string,
+      updatedAt: string,
     } | null > | null,
     nextToken: string | null,
   } | null,
@@ -238,6 +249,8 @@ export type OnUpdateSensorSubscription = {
     longitude: number,
     status: number,
     timestamp: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -251,5 +264,7 @@ export type OnUpdateSensorsSubscription = {
     longitude: number,
     status: number,
     timestamp: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };

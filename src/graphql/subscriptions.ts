@@ -1,4 +1,5 @@
-// tslint:disable
+/* tslint:disable */
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
 export const onUpdateSensor = /* GraphQL */ `
@@ -11,6 +12,8 @@ export const onUpdateSensor = /* GraphQL */ `
       longitude
       status
       timestamp
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -24,6 +27,8 @@ export const onUpdateSensors = /* GraphQL */ `
       longitude
       status
       timestamp
+      createdAt
+      updatedAt
     }
   }
 `;

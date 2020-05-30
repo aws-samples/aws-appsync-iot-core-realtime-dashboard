@@ -46,6 +46,8 @@ exports.handler = async (event) => {
           longitude
           status
           timestamp
+          createdAt
+          updatedAt
         }
       }`;
   
@@ -62,6 +64,8 @@ exports.handler = async (event) => {
           longitude
           status
           timestamp
+          createdAt
+          updatedAt
         }
       }`;
   
