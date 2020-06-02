@@ -1,0 +1,47 @@
+{
+    "Parameters": {
+		"env": {
+			"Type": "String"
+        },
+        "functionupdatesensorArn": {
+			"Type": "String"
+		}
+	},
+    "Resources": {
+        "UpdateSensorRule": {
+            "Type": "AWS::IoT::TopicRule",
+            "Properties": {
+                "TopicRulePayload": {
+                    "Actions": [
+                        {
+                            "Lambda": {
+                                "FunctionArn": {"Ref":"functionupdatesensorArn"}
+                            }
+                        }
+                    ],
+                    "RuleDisabled": false,
+                    "Sql": "select * as data, topic(3) as id from 'dt/sensors/+/sensor-value'"
+                }
+            }
+        },
+        "updatesensorallowIOTRuleInvocation": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": { 
+                    "Fn::Select" : [ "6", {
+                         "Fn::Split": [":", {"Ref": "functionupdatesensorArn"}]
+                         }
+                    ] 
+                },
+                "Principal": "iot.amazonaws.com",
+                "SourceArn": {
+                    "Fn::GetAtt": [
+                        "UpdateSensorRule",
+                        "Arn"
+                    ]
+                }
+            }
+        }
+    }
+}

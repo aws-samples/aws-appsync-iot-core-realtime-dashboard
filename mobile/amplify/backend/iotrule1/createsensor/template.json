@@ -1,0 +1,47 @@
+{
+    "Parameters": {
+		"env": {
+			"Type": "String"
+        },
+        "functioncreatesensorArn": {
+			"Type": "String"
+		}
+	},
+    "Resources": {
+        "CreateSensorRule": {
+            "Type": "AWS::IoT::TopicRule",
+            "Properties": {
+                "TopicRulePayload": {
+                    "Actions": [
+                        {
+                            "Lambda": {
+                                "FunctionArn": {"Ref":"functioncreatesensorArn"}
+                            }
+                        }
+                    ],
+                    "RuleDisabled": false,
+                    "Sql": "select * as data, topic(3) as id from 'cmd/sensors/+/sensor-create'"
+                }
+            }
+        },
+        "createsensorallowIOTRuleInvocation": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": { 
+                    "Fn::Select" : [ "6", {
+                         "Fn::Split": [":", {"Ref": "functioncreatesensorArn"}]
+                         }
+                    ] 
+                },
+                "Principal": "iot.amazonaws.com",
+                "SourceArn": {
+                    "Fn::GetAtt": [
+                        "CreateSensorRule",
+                        "Arn"
+                    ]
+                }
+            }
+        }
+    }
+}
