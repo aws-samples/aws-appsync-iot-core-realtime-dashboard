@@ -49,7 +49,7 @@ $ git clone https://github.com/aws-samples/aws-appsync-iot-core-realtime-dashboa
 **Switch to the app's folder and initialize your Amplify environment**
 
 ```
-$ cd aws-appsync-iot-core-realtime-dashboard
+$ cd aws-appsync-iot-core-realtime-dashboard/web
 $ amplify init
 
 ? Enter a name for the environment: mysandbox
@@ -111,7 +111,7 @@ Open a new terminal window then switch to the app's sensor folder (aws-appsync-i
 Install the Node js packages, and run the Node js app to create your sensor as a 'Thing' in AWS IoT Core.  It will also create and install the certificates your sensor needs to authenticate to IoT Core.
 
 ```
-$ cd sensor
+$ cd ../sensor
 $ npm install
 $ node create-sensors.js
 ```
@@ -148,7 +148,7 @@ Keep this app running and switch to the terminal window for the **root** folder 
 
 **Start the web app**
 
-Switch back to the terminal window pointing to the **root** folder and run:
+Switch back to the terminal window pointing to the **web** folder and run:
 
 ```
 $ npm start
@@ -169,7 +169,7 @@ From the initial map screen, click on a sensor to navigate to the sensor's detai
 
 ## Cleanup
 
-Once you are finished working with this project, you may want to delete the resources it created in your AWS account.  From the **root** folder:
+Once you are finished working with this project, you may want to delete the resources it created in your AWS account.  From the **web** folder:
 
 ```
 $ amplify delete
