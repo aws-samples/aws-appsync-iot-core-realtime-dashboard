@@ -14,13 +14,15 @@ Click on a sensor to view the detailed values received in realtime from that spe
 
 ![Image description](images/architecture.jpg)
 
-1. The sensor component is developed with the AWS IoT Device SDK for Javascript.  The sensor is registered as a Thing in IoT Core and publishes random pH values for six sensors in a JSON payload to the Cloud every 2 seconds.
+1. The sensor component is developed with the AWS IoT Device SDK for JavaScript.  The sensors are registered as _Things_ in IoT Core and publish random values to the Cloud on a configurable frequency.  Metadata about each sensor, such as its geolocation, is stored in a _Thing Shadow_.
 
-2. A rule in IoT Core subscribes to the message topic and forwards the JSON payload to a Lambda function.
+2. A rule in IoT Core subscribes to the message topic and forwards the JSON payload to a Lambda function and the IoT Analytics pipeline.
 
-3. The Node js Lambda function executes a GraphQL mutatation in AppSync.  The mutation saves the latest value for the sensor in DynamoDB and broadcasts the latest value in real-time to the web dashboard. The Lambda function uses an IAM role and policy to obtain permissions to interact with AppSync.
+3. The Node.js Lambda function executes a GraphQL mutation in AppSync.  The mutation saves the sensor's value in DynamoDB and broadcasts the value in real-time to the web dashboard. The Lambda function uses an IAM role and policy to obtain permissions to interact with AppSync.
 
-4. The React web dashboard application is written in Typescript and subscribes to the AppSync sensor update subscriptions.  When new  values are received, the map on the screen is updated in real-time to reflect the new sensor values. The application uses Cognito to authenticate users and allow them to perform the AppSync subscription. 
+4. The React web dashboard application is written in TypeScript and subscribes to the AppSync sensor subscriptions.  When new values are received, a map is updated in real-time to reflect the new sensor values. The application uses Cognito to authenticate users and allow them to perform the AppSync subscription. 
+
+5. The QuickSight dashboard generates charts and reports for Business Intelligence functions using data from the IoT Analytics timeseries optimized datastore. 
 
 ## Getting Started
 
@@ -46,7 +48,7 @@ If you run into issues installing or configuring anything in this project please
 $ git clone https://github.com/aws-samples/aws-appsync-iot-core-realtime-dashboard.git
 ```
 
-**Switch to the app's folder and initialize your Amplify environment**
+**Switch to the app's web folder and initialize your Amplify environment**
 
 ```
 $ cd aws-appsync-iot-core-realtime-dashboard/web
@@ -82,10 +84,11 @@ You will then see a series of output messages as Amplify builds and deploys the 
 Resources being created in your account include:
 
 - AppSync GraphQL API
-- DynamoDB table
-- Cognito user pool
-- Lambda functions (2)
-- IoT Rules (2)
+- DynamoDB Table
+- Cognito User Pool
+- Lambda Functions (3)
+- IoT Rules
+- IoT Analytic
 
 **Install the web app's Node js packages**
 
@@ -130,19 +133,17 @@ $ AWS_PROFILE=[my-aws-profile] node create-sensor.js
 
 **Start the IoT Sensor**
 
-From the sensor terminal window:
+From the **sensor** terminal window:
 
 ```
 $ node index.js
 ```
-You will see output from the app as it connects to IoT Core and publishes new messages for six sensors every two seconds.
+You will see output from the app as it connects to IoT Core and publishes new messages for six sensors every few seconds.
 
 ```
-published to topic cmd/sensors/sensor-1/sensor-create {"status":1,"value":0,"timestamp":1570562143384}
+published to shadow topic $aws/things/sensor-sf-north/shadow/update {"state":{"reported":{"name":"SF Bay - North","enabled":true,"geo":{"latitude":37.800307,"longitude":-122.354788}}}}
 
-published to topic dt/sensors/sensor-1/sensor-value {"status":2,"value":80,"timestamp":1570562145788}
-
-published to topic dt/sensors/sensor-1/sensor-value {"status":3,"value":84,"timestamp":1570562147790}
+published to telemetry topic dt/bay-health/SF/sensor-sf-north/sensor-value {"pH":5,"temperature":54.7,"salinity":25,"disolvedO2":6.1,"timestamp":1591831843844}
 ```
 Keep this app running and switch to the terminal window for the **root** folder for the app.
 
@@ -169,11 +170,19 @@ From the initial map screen, click on a sensor to navigate to the sensor's detai
 
 ## Cleanup
 
-Once you are finished working with this project, you may want to delete the resources it created in your AWS account.  From the **web** folder:
+Once you are finished working with this project, you may want to delete the resources it created in your AWS account.  
+
+From the **web** folder:
 
 ```
 $ amplify delete
 ? Are you sure you want to continue? (This would delete all the environments of the project from the cloud and wipe out all the local amplify resource files) (Y/n)  Y
+```
+
+From the **sensor** folder:
+
+```
+$ node delete-sensors.js
 ```
 
 ## Troubleshooting
