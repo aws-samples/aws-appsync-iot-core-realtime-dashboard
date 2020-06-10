@@ -31,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "amplify:createsensorvalue": "babel src/graphql/mutations.ts -o amplify/backend/function/createsensorvalue/src/mutations.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,5 +48,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2"
   }
 }

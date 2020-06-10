@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"iotdashboardb3110b4b": {
+		"iotdashboardbce44907": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
@@ -20,7 +20,7 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authiotdashboardb3110b4b"
+							"userPoolId": "authiotdashboardbce44907"
 						}
 					}
 				}
@@ -28,25 +28,20 @@
 		}
 	},
 	"function": {
-		"updatesensor": {
-			"service": "Lambda",
-			"providerPlugin": "awscloudformation",
+		"listsensors": {
 			"build": true,
-			"dependsOn": [
-				{
-					"category": "api",
-					"resourceName": "iotdashboard",
-					"attributes": [
-						"GraphQLAPIIdOutput",
-						"GraphQLAPIEndpointOutput"
-					]
-				}
-			]
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
 		},
-		"createsensor": {
-			"service": "Lambda",
-			"providerPlugin": "awscloudformation",
+		"getsensor": {
 			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
+		},
+		"createsensorvalue": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda",
 			"dependsOn": [
 				{
 					"category": "api",
@@ -59,32 +54,25 @@
 			]
 		}
 	},
-	"iotrule1": {
-        "createsensor": {
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [
-                {
-                    "category": "function",
-                    "resourceName": "createsensor",
-                    "attributes": [
-                        "Arn"
-                    ]
-                }
-            ]
-        }
-    },
-    "iotrule2": {
-        "updatesensor": {
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [
-                {
-                    "category": "function",
-                    "resourceName": "updatesensor",
-                    "attributes": [
-                        "Arn"
-                    ]
-                }
-            ]
-        }
-    }
+	"iotrule": {
+		"createsensorvalue": {
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "createsensorvalue",
+					"attributes": [
+						"Arn"
+					]
+				}
+			]
+		}
+	},
+	"iotanalytics": {
+		"batch": {
+			"service": "IotAnalytics",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
 }

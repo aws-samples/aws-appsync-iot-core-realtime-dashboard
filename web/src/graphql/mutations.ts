@@ -2,17 +2,18 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createSensor = /* GraphQL */ `
-  mutation CreateSensor(
-    $input: CreateSensorInput!
-    $condition: ModelSensorConditionInput
+export const createSensorValue = /* GraphQL */ `
+  mutation CreateSensorValue(
+    $input: CreateSensorValueInput!
+    $condition: ModelSensorValueConditionInput
   ) {
-    createSensor(input: $input, condition: $condition) {
+    createSensorValue(input: $input, condition: $condition) {
       id
-      name
-      value
-      latitude
-      longitude
+      sensorId
+      pH
+      temperature
+      salinity
+      disolvedO2
       status
       timestamp
       createdAt
@@ -20,17 +21,18 @@ export const createSensor = /* GraphQL */ `
     }
   }
 `;
-export const updateSensor = /* GraphQL */ `
-  mutation UpdateSensor(
-    $input: UpdateSensorInput!
-    $condition: ModelSensorConditionInput
+export const updateSensorValue = /* GraphQL */ `
+  mutation UpdateSensorValue(
+    $input: UpdateSensorValueInput!
+    $condition: ModelSensorValueConditionInput
   ) {
-    updateSensor(input: $input, condition: $condition) {
+    updateSensorValue(input: $input, condition: $condition) {
       id
-      name
-      value
-      latitude
-      longitude
+      sensorId
+      pH
+      temperature
+      salinity
+      disolvedO2
       status
       timestamp
       createdAt
@@ -38,17 +40,18 @@ export const updateSensor = /* GraphQL */ `
     }
   }
 `;
-export const deleteSensor = /* GraphQL */ `
-  mutation DeleteSensor(
-    $input: DeleteSensorInput!
-    $condition: ModelSensorConditionInput
+export const deleteSensorValue = /* GraphQL */ `
+  mutation DeleteSensorValue(
+    $input: DeleteSensorValueInput!
+    $condition: ModelSensorValueConditionInput
   ) {
-    deleteSensor(input: $input, condition: $condition) {
+    deleteSensorValue(input: $input, condition: $condition) {
       id
-      name
-      value
-      latitude
-      longitude
+      sensorId
+      pH
+      temperature
+      salinity
+      disolvedO2
       status
       timestamp
       createdAt

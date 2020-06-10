@@ -2,14 +2,43 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getSensor = /* GraphQL */ `
-  query GetSensor($id: ID!) {
-    getSensor(id: $id) {
-      id
+export const listSensors = /* GraphQL */ `
+  query ListSensors {
+    listSensors {
+      sensorId
       name
-      value
-      latitude
-      longitude
+      enabled
+      geo {
+        latitude
+        longitude
+      }
+      status
+    }
+  }
+`;
+export const getSensor = /* GraphQL */ `
+  query GetSensor($sensorId: String!) {
+    getSensor(sensorId: $sensorId) {
+      sensorId
+      name
+      enabled
+      geo {
+        latitude
+        longitude
+      }
+      status
+    }
+  }
+`;
+export const getSensorValue = /* GraphQL */ `
+  query GetSensorValue($id: ID!) {
+    getSensorValue(id: $id) {
+      id
+      sensorId
+      pH
+      temperature
+      salinity
+      disolvedO2
       status
       timestamp
       createdAt
@@ -17,19 +46,20 @@ export const getSensor = /* GraphQL */ `
     }
   }
 `;
-export const listSensors = /* GraphQL */ `
-  query ListSensors(
-    $filter: ModelSensorFilterInput
+export const listSensorValues = /* GraphQL */ `
+  query ListSensorValues(
+    $filter: ModelSensorValueFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listSensors(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listSensorValues(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
-        value
-        latitude
-        longitude
+        sensorId
+        pH
+        temperature
+        salinity
+        disolvedO2
         status
         timestamp
         createdAt

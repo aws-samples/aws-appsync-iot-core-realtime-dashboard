@@ -2,14 +2,15 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onUpdateSensor = /* GraphQL */ `
-  subscription OnUpdateSensor($id: ID!) {
-    onUpdateSensor(id: $id) {
+export const onCreateSensorValue = /* GraphQL */ `
+  subscription OnCreateSensorValue($sensorId: String!) {
+    onCreateSensorValue(sensorId: $sensorId) {
       id
-      name
-      value
-      latitude
-      longitude
+      sensorId
+      pH
+      temperature
+      salinity
+      disolvedO2
       status
       timestamp
       createdAt
@@ -17,14 +18,15 @@ export const onUpdateSensor = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateSensors = /* GraphQL */ `
-  subscription OnUpdateSensors {
-    onUpdateSensors {
+export const onCreateSensorValues = /* GraphQL */ `
+  subscription OnCreateSensorValues {
+    onCreateSensorValues {
       id
-      name
-      value
-      latitude
-      longitude
+      sensorId
+      pH
+      temperature
+      salinity
+      disolvedO2
       status
       timestamp
       createdAt

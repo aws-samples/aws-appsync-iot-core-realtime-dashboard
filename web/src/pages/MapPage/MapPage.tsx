@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core';
 import 'mapbox-gl/dist/mapbox-gl.css'
 import ReactMapGL, { NavigationControl } from 'react-map-gl';
 import SensorMarker from '../../components/SensorMarker/SensorMarker'
-import { onUpdateSensors } from '../../graphql/subscriptions';
+import { onCreateSensorValues } from '../../graphql/subscriptions';
 import { ISensor, GetSensors, GetSensorStatusColor } from '../../api/Sensors';
 
 import settings from '../../settings.json';
@@ -30,8 +30,8 @@ interface IViewPort {
 interface ISensorsSubscriptionResponse {
   value: {
     data: {
-      onUpdateSensors: {
-        id: string,
+      onCreateSensorValues: {
+        sensorId: string,
         status: number
       }
     }
@@ -90,17 +90,21 @@ const MapPage: React.FC = () => {
 
       console.log('start subscription to sensors');
       
-      const subscriber = API.graphql(graphqlOperation(onUpdateSensors)).subscribe({
+      const subscriber = API.graphql(graphqlOperation(onCreateSensorValues)).subscribe({
         next: (response: ISensorsSubscriptionResponse) => {
 
           //update the sensor's status in state
-          if (response.value.data.onUpdateSensors) {
-            const newSensors = sensors.map(s =>
-              s.id === response.value.data.onUpdateSensors.id
-                ? { ...s, status: response.value.data.onUpdateSensors.status }
-                : s
-            );
+          if (response.value.data.onCreateSensorValues) {
+            
+            var newSensors = [...sensors];
         
+            for (let item of newSensors) {
+              if (item.sensorId === response.value.data.onCreateSensorValues.sensorId){
+                item.status = response.value.data.onCreateSensorValues.status;
+                break;
+              }
+            }
+
             console.log('sensors updated');
 
             setSensors(newSensors);
@@ -144,10 +148,10 @@ const MapPage: React.FC = () => {
         {sensors.map((sensor) =>
             (
               <SensorMarker 
-                key={sensor.id}
-                id={sensor.id}
-                latitude={sensor.latitude}
-                longitude={sensor.longitude}
+                key={sensor.sensorId}
+                id={sensor.sensorId}
+                latitude={sensor.geo.latitude}
+                longitude={sensor.geo.longitude}
                 color={GetSensorStatusColor(sensor.status)}
                 onSensorClick={handleSensorClick}
               />

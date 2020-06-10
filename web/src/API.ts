@@ -2,26 +2,28 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateSensorInput = {
+export type CreateSensorValueInput = {
   id?: string | null,
-  name: string,
-  value: number,
-  latitude: number,
-  longitude: number,
+  sensorId: string,
+  pH: number,
+  temperature: number,
+  salinity: number,
+  disolvedO2: number,
   status: number,
   timestamp: number,
 };
 
-export type ModelSensorConditionInput = {
-  name?: ModelStringInput | null,
-  value?: ModelFloatInput | null,
-  latitude?: ModelFloatInput | null,
-  longitude?: ModelFloatInput | null,
+export type ModelSensorValueConditionInput = {
+  sensorId?: ModelStringInput | null,
+  pH?: ModelFloatInput | null,
+  temperature?: ModelFloatInput | null,
+  salinity?: ModelFloatInput | null,
+  disolvedO2?: ModelFloatInput | null,
   status?: ModelIntInput | null,
   timestamp?: ModelIntInput | null,
-  and?: Array< ModelSensorConditionInput | null > | null,
-  or?: Array< ModelSensorConditionInput | null > | null,
-  not?: ModelSensorConditionInput | null,
+  and?: Array< ModelSensorValueConditionInput | null > | null,
+  or?: Array< ModelSensorValueConditionInput | null > | null,
+  not?: ModelSensorValueConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -88,31 +90,33 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type UpdateSensorInput = {
+export type UpdateSensorValueInput = {
   id: string,
-  name?: string | null,
-  value?: number | null,
-  latitude?: number | null,
-  longitude?: number | null,
+  sensorId?: string | null,
+  pH?: number | null,
+  temperature?: number | null,
+  salinity?: number | null,
+  disolvedO2?: number | null,
   status?: number | null,
   timestamp?: number | null,
 };
 
-export type DeleteSensorInput = {
+export type DeleteSensorValueInput = {
   id?: string | null,
 };
 
-export type ModelSensorFilterInput = {
+export type ModelSensorValueFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  value?: ModelFloatInput | null,
-  latitude?: ModelFloatInput | null,
-  longitude?: ModelFloatInput | null,
+  sensorId?: ModelStringInput | null,
+  pH?: ModelFloatInput | null,
+  temperature?: ModelFloatInput | null,
+  salinity?: ModelFloatInput | null,
+  disolvedO2?: ModelFloatInput | null,
   status?: ModelIntInput | null,
   timestamp?: ModelIntInput | null,
-  and?: Array< ModelSensorFilterInput | null > | null,
-  or?: Array< ModelSensorFilterInput | null > | null,
-  not?: ModelSensorFilterInput | null,
+  and?: Array< ModelSensorValueFilterInput | null > | null,
+  or?: Array< ModelSensorValueFilterInput | null > | null,
+  not?: ModelSensorValueFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -131,19 +135,20 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type CreateSensorMutationVariables = {
-  input: CreateSensorInput,
-  condition?: ModelSensorConditionInput | null,
+export type CreateSensorValueMutationVariables = {
+  input: CreateSensorValueInput,
+  condition?: ModelSensorValueConditionInput | null,
 };
 
-export type CreateSensorMutation = {
-  createSensor:  {
-    __typename: "Sensor",
+export type CreateSensorValueMutation = {
+  createSensorValue:  {
+    __typename: "SensorValue",
     id: string,
-    name: string,
-    value: number,
-    latitude: number,
-    longitude: number,
+    sensorId: string,
+    pH: number,
+    temperature: number,
+    salinity: number,
+    disolvedO2: number,
     status: number,
     timestamp: number,
     createdAt: string,
@@ -151,19 +156,20 @@ export type CreateSensorMutation = {
   } | null,
 };
 
-export type UpdateSensorMutationVariables = {
-  input: UpdateSensorInput,
-  condition?: ModelSensorConditionInput | null,
+export type UpdateSensorValueMutationVariables = {
+  input: UpdateSensorValueInput,
+  condition?: ModelSensorValueConditionInput | null,
 };
 
-export type UpdateSensorMutation = {
-  updateSensor:  {
-    __typename: "Sensor",
+export type UpdateSensorValueMutation = {
+  updateSensorValue:  {
+    __typename: "SensorValue",
     id: string,
-    name: string,
-    value: number,
-    latitude: number,
-    longitude: number,
+    sensorId: string,
+    pH: number,
+    temperature: number,
+    salinity: number,
+    disolvedO2: number,
     status: number,
     timestamp: number,
     createdAt: string,
@@ -171,38 +177,74 @@ export type UpdateSensorMutation = {
   } | null,
 };
 
-export type DeleteSensorMutationVariables = {
-  input: DeleteSensorInput,
-  condition?: ModelSensorConditionInput | null,
+export type DeleteSensorValueMutationVariables = {
+  input: DeleteSensorValueInput,
+  condition?: ModelSensorValueConditionInput | null,
 };
 
-export type DeleteSensorMutation = {
-  deleteSensor:  {
-    __typename: "Sensor",
+export type DeleteSensorValueMutation = {
+  deleteSensorValue:  {
+    __typename: "SensorValue",
     id: string,
-    name: string,
-    value: number,
-    latitude: number,
-    longitude: number,
+    sensorId: string,
+    pH: number,
+    temperature: number,
+    salinity: number,
+    disolvedO2: number,
     status: number,
     timestamp: number,
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type ListSensorsQuery = {
+  listSensors:  Array< {
+    __typename: "Sensor",
+    sensorId: string,
+    name: string,
+    enabled: boolean,
+    geo:  {
+      __typename: "Geo",
+      latitude: number,
+      longitude: number,
+    },
+    status: number | null,
+  } | null > | null,
 };
 
 export type GetSensorQueryVariables = {
-  id: string,
+  sensorId: string,
 };
 
 export type GetSensorQuery = {
   getSensor:  {
     __typename: "Sensor",
-    id: string,
+    sensorId: string,
     name: string,
-    value: number,
-    latitude: number,
-    longitude: number,
+    enabled: boolean,
+    geo:  {
+      __typename: "Geo",
+      latitude: number,
+      longitude: number,
+    },
+    status: number | null,
+  } | null,
+};
+
+export type GetSensorValueQueryVariables = {
+  id: string,
+};
+
+export type GetSensorValueQuery = {
+  getSensorValue:  {
+    __typename: "SensorValue",
+    id: string,
+    sensorId: string,
+    pH: number,
+    temperature: number,
+    salinity: number,
+    disolvedO2: number,
     status: number,
     timestamp: number,
     createdAt: string,
@@ -210,22 +252,23 @@ export type GetSensorQuery = {
   } | null,
 };
 
-export type ListSensorsQueryVariables = {
-  filter?: ModelSensorFilterInput | null,
+export type ListSensorValuesQueryVariables = {
+  filter?: ModelSensorValueFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListSensorsQuery = {
-  listSensors:  {
-    __typename: "ModelSensorConnection",
+export type ListSensorValuesQuery = {
+  listSensorValues:  {
+    __typename: "ModelSensorValueConnection",
     items:  Array< {
-      __typename: "Sensor",
+      __typename: "SensorValue",
       id: string,
-      name: string,
-      value: number,
-      latitude: number,
-      longitude: number,
+      sensorId: string,
+      pH: number,
+      temperature: number,
+      salinity: number,
+      disolvedO2: number,
       status: number,
       timestamp: number,
       createdAt: string,
@@ -235,18 +278,19 @@ export type ListSensorsQuery = {
   } | null,
 };
 
-export type OnUpdateSensorSubscriptionVariables = {
-  id: string,
+export type OnCreateSensorValueSubscriptionVariables = {
+  sensorId: string,
 };
 
-export type OnUpdateSensorSubscription = {
-  onUpdateSensor:  {
-    __typename: "Sensor",
+export type OnCreateSensorValueSubscription = {
+  onCreateSensorValue:  {
+    __typename: "SensorValue",
     id: string,
-    name: string,
-    value: number,
-    latitude: number,
-    longitude: number,
+    sensorId: string,
+    pH: number,
+    temperature: number,
+    salinity: number,
+    disolvedO2: number,
     status: number,
     timestamp: number,
     createdAt: string,
@@ -254,14 +298,15 @@ export type OnUpdateSensorSubscription = {
   } | null,
 };
 
-export type OnUpdateSensorsSubscription = {
-  onUpdateSensors:  {
-    __typename: "Sensor",
+export type OnCreateSensorValuesSubscription = {
+  onCreateSensorValues:  {
+    __typename: "SensorValue",
     id: string,
-    name: string,
-    value: number,
-    latitude: number,
-    longitude: number,
+    sensorId: string,
+    pH: number,
+    temperature: number,
+    salinity: number,
+    disolvedO2: number,
     status: number,
     timestamp: number,
     createdAt: string,
