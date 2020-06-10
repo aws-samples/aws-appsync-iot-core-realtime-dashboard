@@ -1,50 +1,122 @@
 [
-    {
-        "id": "sensor-1",
-        "data": {
-            "name": "pH - SF Bay - East",
-            "latitude": 37.692625,
-            "longitude": -122.200682
-        }
+  {
+    "name": "SF Bay - East",
+    "thingTypeName": "WATER_QUALITY_SENSOR",
+    "manufacturer": "Xylem",
+    "model": "WQ201",
+    "firmware": "1.30",
+    "frequency": 3000,
+    "geo": {
+      "latitude": 37.692625,
+      "longitude": -122.200682
     },
-    {
-        "id": "sensor-2",
-        "data": {
-            "name": "pH - SF Bay - Southeast",
-            "latitude": 37.612215,
-            "longitude": -122.162933
-        }
-    },
-    {
-        "id": "sensor-3",
-        "data": {
-            "name": "pH - SF Bay - Southwest",
-            "latitude": 37.602464,
-            "longitude": -122.338036   
-        }
-    },
-    {
-        "id": "sensor-4",
-        "data": {
-            "name": "pH - SF Bay - West",
-            "latitude": 37.66228,
-            "longitude": -122.36549            
-        }
-    },
-    {
-        "id": "sensor-5",
-        "data": {
-            "name": "pH - SF Bay - Northwest",
-            "latitude": 37.751372,
-            "longitude": -122.359999            
-        }
-    },
-    {
-        "id": "sensor-6",
-        "data": {
-            "name": "pH - SF Bay - North",
-            "latitude": 37.800307,
-            "longitude": -122.354788   
-        }
+    "settings": {
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
+      "clientId": "sensor-sf-east"
     }
-  ]
+  },
+  {
+    "name": "SF Bay - Southeast",
+    "thingTypeName": "WATER_QUALITY_SENSOR",
+    "manufacturer": "Xylem",
+    "model": "WQ201",
+    "firmware": "1.30",
+    "frequency": 3200,
+    "geo": {
+      "latitude": 37.612215,
+      "longitude": -122.162933
+    },
+    "settings": {
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
+      "clientId": "sensor-sf-southeast"
+    }
+  },
+  {
+    "name": "SF Bay - Southwest",
+    "thingTypeName": "WATER_QUALITY_SENSOR",
+    "manufacturer": "Xylem",
+    "model": "WQ201",
+    "firmware": "1.30",
+    "frequency": 3400,
+    "geo": {
+      "latitude": 37.602464,
+      "longitude": -122.338036
+    },
+    "settings": {
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
+      "clientId": "sensor-sf-southwest"
+    }
+  },
+  {
+    "name": "SF Bay - West",
+    "thingTypeName": "WATER_QUALITY_SENSOR",
+    "manufacturer": "Xylem",
+    "model": "WQ201",
+    "firmware": "1.30",
+    "frequency": 3600,
+    "geo": {
+      "latitude": 37.66228,
+      "longitude": -122.36549
+    },
+    "settings": {
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
+      "clientId": "sensor-sf-west"
+    }
+  },
+  {
+    "name": "SF Bay - Northwest",
+    "thingTypeName": "WATER_QUALITY_SENSOR",
+    "manufacturer": "Xylem",
+    "model": "WQ201",
+    "firmware": "1.30",
+    "frequency": 3800,
+    "geo": {
+      "latitude": 37.751372,
+      "longitude": -122.359999
+    },
+    "settings": {
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
+      "clientId": "sensor-sf-northwest"
+    }
+  },
+  {
+    "name": "SF Bay - North",
+    "thingTypeName": "WATER_QUALITY_SENSOR",
+    "manufacturer": "Xylem",
+    "model": "WQ201",
+    "firmware": "1.30",
+    "frequency": 4000,
+    "geo": {
+      "latitude": 37.800307,
+      "longitude": -122.354788
+    },
+    "settings": {
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
+      "clientId": "sensor-sf-north"
+    }
+  }
+]

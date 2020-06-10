@@ -1,65 +1,87 @@
 const awsIot = require('aws-iot-device-sdk');
 
-//load the settings file that contains the location of the device certificates and the clientId of the sensor
-var settings = require('./settings.json');
-
-//load the sensor records
+//load the sensors file that contains the location of the device certificates and the clientId of the sensor
 var sensors = require('./sensors.json');
 
 //constants used in the application
-const VALUE_TOPIC = "dt/sensors/[id]/sensor-value"; //topic to which sensor values will be published
-const CREATE_TOPIC =  "cmd/sensors/[id]/sensor-create"; //topic to which the create sensor request will be published
-const VALUE_RATE = 2000; //rate in milliseconds new values will be published to the Cloud
+const SHADOW_TOPIC = "$aws/things/[thingName]/shadow/update";
+const VALUE_TOPIC = "dt/bay-health/SF/[thingName]/sensor-value"; //topic to which sensor values will be published
 
-//initialize the IOT device
-var device = awsIot.device(settings);
-
-//create a placeholder for the message
-var msg = {
-    value: 0,
-    timestamp: new Date().getTime()
+//shadow document to be transmitted at statup
+var shadowDocument = {
+    state: {
+        reported: {
+            name: "",
+            enabled: true,
+            geo: {
+                latitude: 0,
+                longitude: 0
+            }
+        }
+    }
 }
 
-device.on('connect', function() {
+async function run(sensor) {
+
+    //initialize the IOT device
+    var device = awsIot.device(sensor.settings);
+
+    //create a placeholder for the message
+    var msg = {
+        pH: 0,
+        temperature: 0,
+        salinity: 0,
+        disolvedO2: 0,
+        timestamp: new Date().getTime()
+    }
+
+    device.on('connect', function() {
     
-    console.log('connected to IoT Hub');
-
-    //loop all sensors - initiating publishing a create-sensor message
-    sensors.forEach(item => {
-
-        //publish a message to the create topic - this will trigger the sensor to be created by the app API
-        var topic = CREATE_TOPIC.replace('[id]', item.id);
-
-        device.publish(topic, JSON.stringify(item.data)); 
-
-        console.log('published to topic ' + topic + ' ' + JSON.stringify(item.data));
-    })
-
-
-    //publish new value readings very 2 seconds
-    setInterval(sendSensorState, VALUE_RATE);
-});
-
-device.on('error', function(error) {
-    console.log('Error: ', error);
-});
-
-function sendSensorState() {
-
-    sensors.forEach(item => {
-
-        msg.value = 20 + Math.floor((Math.random() * (80 - 1) + 1));
-        msg.value = (msg.value / 10);
-
-        msg.timestamp = new Date().getTime();
+        console.log('connected to IoT Hub');
     
-        var topic = VALUE_TOPIC.replace('[id]', item.id);
+        //publish the shadow document for the sensor
+        var topic = SHADOW_TOPIC.replace('[thingName]', sensor.settings.clientId);
     
-        device.publish(topic, JSON.stringify(msg)); 
+        shadowDocument.state.reported.name = sensor.name;
+        shadowDocument.state.reported.enabled = true;
+        shadowDocument.state.reported.geo.latitude = sensor.geo.latitude;
+        shadowDocument.state.reported.geo.longitude = sensor.geo.longitude;
     
-        console.log('published to topic ' + topic + ' ' + JSON.stringify(msg));
-    })
+        device.publish(topic, JSON.stringify(shadowDocument)); 
+    
+        console.log('published to shadow topic ' + topic + ' ' + JSON.stringify(shadowDocument));
+    
+        //publish new value readings based on value_rate
+        setInterval(function(){
+
+            //calculate randome values for each sensor reading
+            msg.pH = RandomValue(50, 100) / 10;
+            msg.temperature = RandomValue(480, 570) / 10;
+            msg.salinity = RandomValue(200, 350) / 10;
+            msg.disolvedO2 = RandomValue(40, 120) / 10;
+
+            msg.timestamp = new Date().getTime();
+
+            //publish the sensor reading message
+            var topic = VALUE_TOPIC.replace('[thingName]', sensor.settings.clientId);
+
+            device.publish(topic, JSON.stringify(msg)); 
+
+            console.log('published to telemetry topic ' + topic + ' ' + JSON.stringify(msg));
+
+        }, sensor.frequency);
+    });
+
+    device.on('error', function(error) {
+        console.log('Error: ', error);
+    });
 }
-  
-  
 
+function RandomValue (min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+//run simulation for each sensor
+sensors.forEach((sensor) => {
+    run(sensor);
+})

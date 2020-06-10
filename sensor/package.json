@@ -9,8 +9,7 @@
   "author": "David Moser <davmoser@amazon.com>",
   "license": "MIT-0",
   "dependencies": {
-    "async": "^3.1.0",
-    "aws-iot-device-sdk": "^2.2.1",
+    "aws-iot-device-sdk": "^2.2.4",
     "aws-sdk": "^2.546.0"
   }
 }
