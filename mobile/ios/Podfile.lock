@@ -272,7 +272,7 @@ PODS:
     - React
   - react-native-netinfo (5.9.2):
     - React
-  - react-native-safe-area-context (3.0.2):
+  - react-native-safe-area-context (3.0.3):
     - React
   - React-RCTActionSheet (0.62.2):
     - React-Core/RCTActionSheetHeaders (= 0.62.2)
@@ -540,7 +540,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
   react-native-mapbox-gl: 77b87a1dd2d7b41b6b77018c0f3bed5f8ee55c81
   react-native-netinfo: 9b9929fcfa4aabe92f49a9fb3f25394cc8721e87
-  react-native-safe-area-context: c23e140ee9a482e89991798aed110fbffefb2f51
+  react-native-safe-area-context: 7371751a75e1ca7211f17ea0730ffcb264e2f85c
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0
   React-RCTBlob: a332773f0ebc413a0ce85942a55b064471587a71
