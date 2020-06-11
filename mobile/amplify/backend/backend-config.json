@@ -1,0 +1,78 @@
+{
+	"auth": {
+		"iotdashboardbce44907": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
+	"api": {
+		"iotdashboard": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [
+						{
+							"authenticationType": "AWS_IAM"
+						}
+					],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authiotdashboardbce44907"
+						}
+					}
+				}
+			}
+		}
+	},
+	"function": {
+		"listsensors": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
+		},
+		"getsensor": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
+		},
+		"createsensorvalue": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda",
+			"dependsOn": [
+				{
+					"category": "api",
+					"resourceName": "iotdashboard",
+					"attributes": [
+						"GraphQLAPIIdOutput",
+						"GraphQLAPIEndpointOutput"
+					]
+				}
+			]
+		}
+	},
+	"iotrule": {
+		"createsensorvalue": {
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "createsensorvalue",
+					"attributes": [
+						"Arn"
+					]
+				}
+			]
+		}
+	},
+	"iotanalytics": {
+		"batch": {
+			"service": "IotAnalytics",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}

@@ -1,0 +1,9 @@
+{
+    "permissions": {
+        "api": {
+            "iotdashboard": [
+                "create"
+            ]
+        }
+    }
+}

@@ -1,0 +1,212 @@
+{
+    "Parameters": {
+        "ProjectName": {
+            "Type": "String"
+        },
+        "ChannelName": {
+            "Type": "String"
+        },
+        "DatastoreName": {
+            "Type": "String"
+        },
+        "PipelineName": {
+            "Type": "String"
+        },
+        "DatasetName": {
+            "Type": "String"
+        },
+        "SqlQuery": {
+            "Type": "String"
+        },
+        "ScheduleExpression": {
+            "Type": "String"
+        },
+        "IoTRuleName": {
+            "Type": "String"
+        },
+        "IoTRuleSQL": {
+            "Type": "String"
+        },
+        "env": {
+			"Type": "String"
+        }
+    },
+    "Resources": {
+        "Channel": {
+            "Type": "AWS::IoTAnalytics::Channel",
+            "Properties": {
+                "ChannelName": {
+                    "Ref": "ChannelName"
+                },
+                "Tags": [
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "ProjectName"
+                        }
+                    }
+                ]
+            }
+        },
+        "Datastore": {
+            "Type": "AWS::IoTAnalytics::Datastore",
+            "Properties": {
+                "DatastoreName": {
+                    "Ref": "DatastoreName"
+                },
+                "Tags": [
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "ProjectName"
+                        }
+                    }
+                ]
+            }
+        },
+        "Pipeline": {
+            "Type": "AWS::IoTAnalytics::Pipeline",
+            "DependsOn": [
+                "Channel",
+                "Datastore"
+            ],
+            "Properties": {
+                "PipelineName": {
+                    "Ref": "PipelineName"
+                },
+                "PipelineActivities": [
+                    {
+                        "Channel": {
+                            "Name": "ChannelActivity",
+                            "ChannelName": {
+                                "Ref": "ChannelName"
+                            },
+                            "Next": "DatastoreActivity"
+                        },
+                        "Datastore": {
+                            "Name": "DatastoreActivity",
+                            "DatastoreName": {
+                                "Ref": "DatastoreName"
+                            }
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "ProjectName"
+                        }
+                    }
+                ]
+            }
+        },
+        "SqlDataset": {
+            "Type": "AWS::IoTAnalytics::Dataset",
+            "DependsOn": "Datastore",
+            "Properties": {
+                "DatasetName": {
+                    "Ref": "DatasetName"
+                },
+                "Actions": [
+                    {
+                        "ActionName": "SqlAction",
+                        "QueryAction": {
+                            "SqlQuery": {
+                                "Ref": "SqlQuery"
+                            }
+                        }
+                    }
+                ],
+                "Triggers": [
+                    {
+                        "Schedule": {
+                            "ScheduleExpression": {
+                                "Ref": "ScheduleExpression"
+                            }
+                        }
+                    }
+                ],
+                "RetentionPeriod": {
+                    "Unlimited": false,
+                    "NumberOfDays": 30
+                },
+                "Tags": [
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "ProjectName"
+                        }
+                    }
+                ]
+            }
+        },
+        "MyTopicRule": {
+            "Type": "AWS::IoT::TopicRule",
+            "Properties": {
+               "RuleName": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            {
+                                "Ref": "IoTRuleName"
+                            },
+                            "_",
+                            {
+                                "Ref": "env"
+                            }
+                        ]
+                    ]
+               },
+               "TopicRulePayload": {
+                  "RuleDisabled": "false",
+                  "Sql": {
+                      "Ref": "IoTRuleSQL"
+                    },
+                  "AwsIotSqlVersion": "2016-03-23",
+                  "Actions": [
+                    {
+                     "IotAnalytics": {
+                        "ChannelName": {
+                           "Ref": "ChannelName"
+                        },
+                        "RoleArn": {
+                           "Fn::GetAtt": ["iotAnalyticsRole", "Arn"]
+                        }
+                     }
+                  }]
+               }
+            }
+         },
+         "iotAnalyticsRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+               "AssumeRolePolicyDocument": {
+                  "Version": "2012-10-17",
+                  "Statement": [{
+                     "Effect": "Allow",
+                     "Principal": {
+                        "Service": ["iot.amazonaws.com"]
+                     },
+                     "Action": ["sts:AssumeRole"]
+                  }]
+               },
+               "Policies": [
+                {
+                    "PolicyName": "root",
+                    "PolicyDocument": {
+                        "Version": "2012-10-17",
+                        "Statement": [
+                            {
+                                "Effect": "Allow",
+                                "Action": "iotanalytics:BatchPutMessage",
+                                "Resource": "*"
+                            }
+                        ]
+                    }
+                }
+            ]
+            }
+         }
+    }
+}

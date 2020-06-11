@@ -1,0 +1,42 @@
+type SensorValue @model (subscriptions: null)
+@auth (
+    rules: [
+        { allow: private, provider: iam},
+        { allow: private, provider: userPools}
+    ]
+) 
+{
+  id: ID!
+  sensorId: String!
+  pH: Float!
+  temperature: Float!
+  salinity: Float!
+  disolvedO2: Float!
+  status: Int!
+  timestamp: AWSTimestamp!
+}
+
+type Subscription {
+  onCreateSensorValue(sensorId: String!): SensorValue @aws_subscribe(mutations: ["createSensorValue"])
+  onCreateSensorValues: SensorValue @aws_subscribe(mutations: ["createSensorValue"])
+}
+
+type Geo
+{
+  latitude: Float!
+  longitude: Float!
+}
+
+type Sensor
+{
+  sensorId: String!
+  name: String!
+  enabled: Boolean!
+  geo: Geo!
+  status: Int
+}
+
+type Query {
+  listSensors: [Sensor] @function(name: "iotjumpstart-list-sensors-${env}")
+  getSensor(sensorId: String!): Sensor @function(name: "iotjumpstart-get-sensor-${env}")
+}
