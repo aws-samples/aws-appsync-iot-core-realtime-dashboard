@@ -30,7 +30,7 @@ Click on a sensor to view the detailed values received in realtime from that spe
 
 1. An AWS account in which you have Administrator access.
 
-2. [Node JS](https://nodejs.org/en/download/) (^10.0) with NPM (^5.2)
+2. [Node.js](https://nodejs.org/en/download/) (^10.0) with NPM (^5.2)
 
 3. [Amplify CLI](https://aws-amplify.github.io/docs/) (^4.21.1).
 
@@ -49,10 +49,21 @@ If you run into issues installing or configuring anything in this project please
 $ git clone https://github.com/aws-samples/aws-appsync-iot-core-realtime-dashboard.git
 ```
 
-**Switch to the app's web folder and initialize your Amplify environment**
+**Switch to the project's web folder**
 
 ```
 $ cd aws-appsync-iot-core-realtime-dashboard/web
+```
+
+**Install the web app's Node.js packages**
+
+```
+$ npm install
+```
+
+**Initialize your Amplify environment**
+
+```
 $ amplify init
 
 ? Enter a name for the environment: mysandbox
@@ -88,14 +99,9 @@ Resources being created in your account include:
 - DynamoDB Table
 - Cognito User Pool
 - Lambda Functions (3)
-- IoT Rules
+- IoT Rule
 - IoT Analytic
 
-**Install the web app's Node js packages**
-
-```
-$ npm install
-```
 
 **Configure Mapbox API key**
 
@@ -110,17 +116,18 @@ This application uses maps from [Mapbox](https://www.mapbox.com/) to display the
 
 **Install the IoT sensor simulator**
 
-Open a new terminal window then switch to the app's sensor folder (aws-appsync-iot-core-realtime-dashboard/sensor). 
+Open a new terminal window then switch to the app's **sensor** folder (aws-appsync-iot-core-realtime-dashboard/sensor). 
 
-Install the Node js packages, and run the Node js app to create your sensor as a 'Thing' in AWS IoT Core.  It will also create and install the certificates your sensor needs to authenticate to IoT Core.
+Install the Node js packages, and run the Node js app to create your sensor as a _Thing_ in AWS IoT Core.  It will also create and install the certificates your sensor needs to authenticate to IoT Core.
+
+From the app's **sensor** folder:
 
 ```
-$ cd ../sensor
 $ npm install
 $ node create-sensors.js
 ```
 
-*Note - this will create the sensor using your default AWS profile account and region.  If you have not specified a default region in your local AWS configuration, it will default to us-east-1.
+_*Note - this will create the sensor using your default AWS profile account and region.  If you have not specified a default region in your local AWS configuration, it will default to us-east-1._
 
 If you do not have a **default** profile or you are using a profile other than **default**, run the app with an AWS_PROFILE environment variable specifiying the profile name you would like to use.
 
@@ -130,7 +137,7 @@ Replace [my-aws-profile] with the name of your profile:
 $ AWS_PROFILE=[my-aws-profile] node create-sensor.js
 ```
 
-## Run the App
+## Run the Web App
 
 **Start the IoT Sensor**
 
@@ -163,11 +170,82 @@ The web app requires users to authenticate via Cognito.  The first screen you wi
 
 Cognito will then email you a confirmation code.  Enter this code into the subsequent confirmation screen and logon to the app with your credentials.
 
-**Use the App!**
+**Use the Web App**
 
 You should now see a screen similar to the one at the top of this guide.  If you look at the terminal window running the sensor app, you shoud see the values being published to the Cloud reflected in the web app's sensor gauge in real-time.
 
 From the initial map screen, click on a sensor to navigate to the sensor's detail page.
+
+## The Mobile App
+
+![Image description](images/mobile.jpg)
+
+This project also contains a **React Native** mobile application.  In order to run this app you will also need a **Mac** with:
+
+- Xcode (^11.0)
+- Xcode iPhone Simulator enabled
+- Xcode Command-line Tools
+- CocoaPods
+
+**Install the mobile app**
+
+Switch to the project's **mobile** folder:
+
+```
+$ cd aws-appsync-iot-core-realtime-dashboard/mobile
+```
+
+Install the mobile app's Node.js packages
+
+```
+$ npm install
+```
+
+Install the mobile app's CocoaPods packages
+
+```
+$ cd ios
+$ pod install
+$ cd ..
+```
+
+Pull the Amplify backend environment into the mobile app
+
+```
+$ amplify pull
+
+? Do you want to use an AWS profile? (Y/n) Y
+? Please choose the profile you want to use: [default]
+? Which app are you working on? iotanalytics
+? Choose your default editor: [select your favorite IDE]
+? Choose the type of app that you're building: javascript
+? What javascript framework are you using: react-native
+? Source Directory Path:  src
+? Distribution Directory Path: dist
+? Build Command:  npm run-script build
+? Start Command: npm run-script start
+? Do you plan on modifying this backend? Yes
+```
+
+The Mobile app also uses **MapBox** to display a map.  Configure the MapBox token for the mobile app by adding your token to the ***src/settings.json*** file in the mobile folder:
+
+```
+{
+    "mapboxApiAccessToken": "your-token-here"
+}
+```
+
+Start the mobile app in the iOS Simulator
+
+```
+$ npm run ios
+```
+
+**Use the mobile app**
+
+Logon to the mobile app with the same credentials you created for the web app.
+
+Tap on a sensor in the map to view the real-time readings coming off the sensor.
 
 ## Cleanup
 
