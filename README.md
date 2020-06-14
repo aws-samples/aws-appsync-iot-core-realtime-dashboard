@@ -80,6 +80,18 @@ Once your account has been provisioned, entering the 'amplify status' command wi
 
 ```
 $ amplify status
+
+Current Environment: mysandbox
+
+| Category     | Resource name        | Operation | Provider plugin   |
+| ------------ | -------------------- | --------- | ----------------- |
+| Auth         | iotdashboardbce44907 | Create    | awscloudformation |
+| Api          | iotdashboard         | Create    | awscloudformation |
+| Function     | listsensors          | Create    | awscloudformation |
+| Function     | getsensor            | Create    | awscloudformation |
+| Function     | createsensorvalue    | Create    | awscloudformation |
+| Iotrule      | createsensorvalue    | Create    | awscloudformation |
+| Iotanalytics | batch                | Create    | awscloudformation |
 ```
 
 **Deploy the app infrastructure to your AWS account**
@@ -176,6 +188,45 @@ You should now see a screen similar to the one at the top of this guide.  If you
 
 From the initial map screen, click on a sensor to navigate to the sensor's detail page.
 
+## Build the QuickSight BI Dashboard
+
+Sensor data has been transmitted to both the real-time dashboard and IoT Analytics.  We will now use IoT Analytics to build a BI dash board using **QuickSight**.
+
+Logon to the AWS Console and navigate to the **IoT Analytics** service and select **Data sets** from the menu.
+
+Select the **bayhealth_app_dataset**
+
+
+![Image description](images/datasets.jpg)
+
+
+From the **Actions** menu select **Run now** to refresh the data set.
+
+
+![Image description](images/datasetrun.jpg)
+
+
+From the AWS Console navigate to the AWS QuickSight service in the North Virginia region.
+
+If you have not registered for QuickSight in your account follow these instructions to configure the service:
+
+- Enroll for standard edition (if you have not used it before)
+- Click on your login user (upper right) -> Manage QuickSight -> Account Settings -> Add and Remove -> Check IoT Analytics -> Apply
+- Click on QuickSight logo (upper left) to navigate to home page 
+- Change the region to your working region
+
+From the QuickSight menu:
+
+- Select New Analysis -> New data set -> Choose AWS IOT Analytics
+- Select an AWS IoT Analytics dataset to import - Choose **bayhealth_app_dataset**
+- Click Create data source -> Visualize
+- Select items from the **Field List** to visulaize 
+    i.   Choose sensorId for Y axis 
+    ii.  Choose all the sensor readings for Value axis
+    iii. Choose average from Value drop down
+
+![Image description](images/quicksight.jpg)
+
 ## The Mobile App
 
 ![Image description](images/mobile.jpg)
@@ -227,7 +278,7 @@ $ amplify pull
 ? Do you plan on modifying this backend? Yes
 ```
 
-The Mobile app also uses **MapBox** to display a map.  Configure the MapBox token for the mobile app by adding your token to the ***src/settings.json*** file in the mobile folder:
+The mobile app also uses **MapBox** to display a map of the sensors.  Configure the MapBox token for the mobile app by adding your token to the ***src/settings.json*** file in the **mobile** folder:
 
 ```
 {
