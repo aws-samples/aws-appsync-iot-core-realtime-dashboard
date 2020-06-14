@@ -165,7 +165,6 @@ published to shadow topic $aws/things/sensor-sf-north/shadow/update {"state":{"r
 
 published to telemetry topic dt/bay-health/SF/sensor-sf-north/sensor-value {"pH":5,"temperature":54.7,"salinity":25,"disolvedO2":6.1,"timestamp":1591831843844}
 ```
-Keep this app running and switch to the terminal window for the **root** folder for the app.
 
 **Start the web app**
 
@@ -174,6 +173,7 @@ Switch back to the terminal window pointing to the **web** folder and run:
 ```
 $ npm start
 ```
+
 This will launch the application in your machine's default web browser.
 
 **Sign-up and Sign-in**
@@ -221,9 +221,9 @@ From the QuickSight menu:
 - Select an AWS IoT Analytics dataset to import - Choose **bayhealth_app_dataset**
 - Click Create data source -> Visualize
 - Select items from the **Field List** to visulaize 
-    i.   Choose sensorId for Y axis 
-    ii.  Choose all the sensor readings for Value axis
-    iii. Choose average from Value drop down
+    - Choose sensorId for Y axis 
+    - Choose all the sensor readings for Value axis
+    - Choose average from Value drop down
 
 ![Image description](images/quicksight.jpg)
 
@@ -267,7 +267,7 @@ $ amplify pull
 
 ? Do you want to use an AWS profile? (Y/n) Y
 ? Please choose the profile you want to use: [default]
-? Which app are you working on? iotanalytics
+? Which app are you working on? iotdashboard
 ? Choose your default editor: [select your favorite IDE]
 ? Choose the type of app that you're building: javascript
 ? What javascript framework are you using: react-native
