@@ -24,7 +24,7 @@
     "aws-amplify": "^3.0.15",
     "aws-amplify-react-native": "^4.2.0",
     "react": "16.11.0",
-    "react-native": "0.62.2",
+    "react-native": "0.62.3",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-paper": "^3.10.1",
     "react-native-safe-area-context": "^3.0.2",
