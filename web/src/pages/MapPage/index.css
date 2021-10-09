@@ -1,0 +1,15 @@
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.sensor {
+    border-radius: 50%;
+    height: 1em;
+    width: 1em;
+    cursor: pointer;
+}
