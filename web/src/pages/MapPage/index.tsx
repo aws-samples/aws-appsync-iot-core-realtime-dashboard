@@ -6,7 +6,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { GetSensors, UpdateSensorMarker, GetSensorMarker } from '../../api/Sensors';
 import { API, graphqlOperation } from 'aws-amplify';
 import { onCreateSensorValues } from '../../graphql/subscriptions';
-import { Container, Header, Box } from '@awsui/components-react';
+import { Container } from '@awsui/components-react';
 
 import './index.css'
 

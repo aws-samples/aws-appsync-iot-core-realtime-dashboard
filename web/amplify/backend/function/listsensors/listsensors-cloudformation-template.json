@@ -160,13 +160,44 @@
                   }
                 ]
               }
-            },
+            }
+          ]
+        }
+      }
+    },
+    "lambdaiotexecutionpolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "lambda-iot-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
             {
               "Effect": "Allow",
               "Action": [
                 "iot:SearchIndex"
               ],
-              "Resource": "*"
+              "Resource": {
+                "Fn::Sub": [
+                  "arn:aws:iot:${region}:${account}:*",
+                  {
+                    "region": {
+                      "Ref": "AWS::Region"
+                    },
+                    "account": {
+                      "Ref": "AWS::AccountId"
+                    }
+                  }
+                ]
+              }
             }
           ]
         }
