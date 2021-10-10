@@ -113,18 +113,8 @@ Resources being created in your account include:
 - Lambda Functions (3)
 - IoT Rule
 - IoT Analytic
+- Amazon Location Map
 
-
-**Configure Mapbox API key**
-
-This application uses maps from [Mapbox](https://www.mapbox.com/) to display the sensor locations.  You must create an account and request a free ***default access token***.  Once you have the token, update the ***src/settings.json*** file with the token value.
-
-***src/settings.json***
-```
-{
-    "mapboxApiAccessToken": "your-token-here"
-}
-```
 
 **Install the IoT sensor simulator**
 

@@ -1,0 +1,12 @@
+{
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "mapName": "iotdashboard",
+  "mapStyle": "VectorEsriDarkGrayCanvas",
+  "pricingPlan": "RequestBasedUsage",
+  "isDefault": true
+}
