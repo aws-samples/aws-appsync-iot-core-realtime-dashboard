@@ -13,6 +13,7 @@ const Layout: React.FC = (props) => {
           <AppBar/>
           <AppLayout 
                 toolsHide={true}
+                navigationHide={true}
                 headerSelector='#b #h'
                 navigation={
                   <SideNavigation

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import { API, graphqlOperation } from 'aws-amplify';
 import { GetSensor, GetSensorTypes } from '../../api/Sensors';
-import { Box, Header, SegmentedControl, SpaceBetween } from '@awsui/components-react';
+import { Box, Header, SegmentedControl, SpaceBetween, BreadcrumbGroup } from '@awsui/components-react';
 import SensorValuePanel from '../../components/SensorValuePanel'
 import SensorChart from '../../components/SensorChart';
 import { onCreateSensorValue } from '../../graphql/subscriptions';
@@ -97,6 +97,13 @@ const SensorPage: React.FC = () => {
 
     return (
         <Box margin={{ bottom: "l", top: "s" }} padding="xxs">
+            <BreadcrumbGroup
+                items={[
+                    { text: "Sensor Map", href: "#" },
+                    { text: "Sensor", href: "#sensor" },
+                ]}
+                ariaLabel="Breadcrumbs"
+            />
             <Header variant="h1"
             actions={
                 <SegmentedControl

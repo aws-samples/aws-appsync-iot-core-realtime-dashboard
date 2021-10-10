@@ -116,7 +116,7 @@ const MapPage: React.FC = () => {
         <Box margin={{ bottom: "l", top: "s" }} padding="xxs">
             <SpaceBetween size="m">
                 <Header variant="h1">
-                    Sensor Map
+                    Bay Health
                 </Header>
                 <Container>
                     <div id='map'/>
