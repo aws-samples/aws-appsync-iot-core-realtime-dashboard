@@ -1,0 +1,4 @@
+{
+    "IoTRuleName": "bayhealth_app_create_sensorvalue_rule",
+    "IoTRuleSQL": "select * as data, topic(4) as sensorId from 'dt/bay-health/SF/+/sensor-value'"
+}

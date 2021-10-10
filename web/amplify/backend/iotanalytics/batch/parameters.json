@@ -1,0 +1,11 @@
+{
+    "ProjectName": "bayhealth_app_project",
+    "ChannelName": "bayhealth_app_channel",
+    "DatastoreName": "bayhealth_app_datastore",
+    "PipelineName": "bayhealth_app_pipeline",
+    "DatasetName": "bayhealth_app_dataset",
+    "SqlQuery": "select * from bayhealth_app_datastore",
+    "ScheduleExpression": "cron(0 10 * * ? *)",
+    "IoTRuleName": "bayhealth_app_analytics_rule",
+    "IoTRuleSQL": "SELECT *, topic(4) as sensorid FROM 'dt/bay-health/SF/+/sensor-value'"
+}

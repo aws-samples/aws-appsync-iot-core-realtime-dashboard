@@ -83,5 +83,26 @@
       "pricingPlan": "RequestBasedUsage",
       "accessType": "AuthorizedUsers"
     }
-  }
+  },
+	"iotrule": {
+		"createsensorvalue": {
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "createsensorvalue",
+					"attributes": [
+						"Arn"
+					]
+				}
+			]
+		}
+	},
+	"iotanalytics": {
+		"batch": {
+			"service": "IotAnalytics",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
 }

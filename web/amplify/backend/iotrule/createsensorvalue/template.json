@@ -1,0 +1,69 @@
+{
+    "Parameters": {
+		"env": {
+			"Type": "String"
+        },
+        "functioncreatesensorvalueArn": {
+			"Type": "String"
+        },        
+        "IoTRuleName": {
+            "Type": "String"
+        },
+        "IoTRuleSQL": {
+            "Type": "String"
+        }
+	},
+    "Resources": {
+        "CreateSensorValueRule": {
+            "Type": "AWS::IoT::TopicRule",
+            "Properties": {
+                "RuleName": {
+                        "Fn::Join": [
+                            "",
+                            [
+                                {
+                                    "Ref": "IoTRuleName"
+                                },
+                                "_",
+                                {
+                                    "Ref": "env"
+                                }
+                            ]
+                        ]
+                },
+                "TopicRulePayload": {
+                    "Actions": [
+                        {
+                            "Lambda": {
+                                "FunctionArn": {"Ref":"functioncreatesensorvalueArn"}
+                            }
+                        }
+                    ],
+                    "RuleDisabled": false,
+                    "Sql": {
+                        "Ref": "IoTRuleSQL"
+                    }
+                }
+            }
+        },
+        "createsensorvalueallowIOTRuleInvocation": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "Action": "lambda:InvokeFunction",
+                "FunctionName": { 
+                    "Fn::Select" : [ "6", {
+                         "Fn::Split": [":", {"Ref": "functioncreatesensorvalueArn"}]
+                         }
+                    ] 
+                },
+                "Principal": "iot.amazonaws.com",
+                "SourceArn": {
+                    "Fn::GetAtt": [
+                        "CreateSensorValueRule",
+                        "Arn"
+                    ]
+                }
+            }
+        }
+    }
+}
