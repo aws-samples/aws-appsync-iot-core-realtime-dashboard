@@ -81,15 +81,25 @@ $ amplify status
 
 Current Environment: mysandbox
 
-| Category     | Resource name        | Operation | Provider plugin   |
-| ------------ | -------------------- | --------- | ----------------- |
-| Auth         | iotdashboardbce44907 | Create    | awscloudformation |
-| Api          | iotdashboard         | Create    | awscloudformation |
-| Function     | listsensors          | Create    | awscloudformation |
-| Function     | getsensor            | Create    | awscloudformation |
-| Function     | createsensorvalue    | Create    | awscloudformation |
-| Iotrule      | createsensorvalue    | Create    | awscloudformation |
-| Iotanalytics | batch                | Create    | awscloudformation |
+┌──────────────┬──────────────────────┬───────────┬───────────────────┐
+│ Category     │ Resource name        │ Operation │ Provider plugin   │
+├──────────────┼──────────────────────┼───────────┼───────────────────┤
+│ Auth         │ iotdashboard6b12339b │ No Change │ awscloudformation │
+├──────────────┼──────────────────────┼───────────┼───────────────────┤
+│ Function     │ listsensors          │ No Change │ awscloudformation │
+├──────────────┼──────────────────────┼───────────┼───────────────────┤
+│ Function     │ getsensor            │ No Change │ awscloudformation │
+├──────────────┼──────────────────────┼───────────┼───────────────────┤
+│ Function     │ createsensorvalue    │ No Change │ awscloudformation │
+├──────────────┼──────────────────────┼───────────┼───────────────────┤
+│ Api          │ iotdashboard         │ No Change │ awscloudformation │
+├──────────────┼──────────────────────┼───────────┼───────────────────┤
+│ Geo          │ iotdashboard         │ No Change │ awscloudformation │
+├──────────────┼──────────────────────┼───────────┼───────────────────┤
+│ Iotrule      │ createsensorvalue    │ No Change │ awscloudformation │
+├──────────────┼──────────────────────┼───────────┼───────────────────┤
+│ Iotanalytics │ batch                │ No Change │ awscloudformation │
+└──────────────┴──────────────────────┴───────────┴───────────────────┘
 ```
 
 **Deploy the app infrastructure to your AWS account**
@@ -215,76 +225,6 @@ From the QuickSight menu:
 
 ![Image description](images/quicksight.jpg)
 
-## The Mobile App
-
-![Image description](images/mobile.jpg)
-
-This project also contains a **React Native** mobile application.  In order to run this app you will also need a **Mac** with:
-
-- Xcode (^11.0)
-- Xcode iPhone Simulator enabled
-- Xcode Command-line Tools
-- CocoaPods
-
-**Install the mobile app**
-
-Switch to the project's **mobile** folder:
-
-```
-$ cd aws-appsync-iot-core-realtime-dashboard/mobile
-```
-
-Install the mobile app's Node.js packages
-
-```
-$ npm install
-```
-
-Install the mobile app's CocoaPods packages
-
-```
-$ cd ios
-$ pod install
-$ cd ..
-```
-
-Pull the Amplify backend environment into the mobile app
-
-```
-$ amplify pull
-
-? Do you want to use an AWS profile? (Y/n) Y
-? Please choose the profile you want to use: [default]
-? Which app are you working on? iotdashboard
-? Choose your default editor: [select your favorite IDE]
-? Choose the type of app that you're building: javascript
-? What javascript framework are you using: react-native
-? Source Directory Path:  src
-? Distribution Directory Path: dist
-? Build Command:  npm run-script build
-? Start Command: npm run-script start
-? Do you plan on modifying this backend? Yes
-```
-
-The mobile app also uses **MapBox** to display a map of the sensors.  Configure the MapBox token for the mobile app by adding your token to the ***src/settings.json*** file in the **mobile** folder:
-
-```
-{
-    "mapboxApiAccessToken": "your-token-here"
-}
-```
-
-Start the mobile app in the iOS Simulator
-
-```
-$ npm run ios
-```
-
-**Use the mobile app**
-
-Logon to the mobile app with the same credentials you created for the web app.
-
-Tap on a sensor in the map to view the real-time readings coming off the sensor.
 
 ## Cleanup
 

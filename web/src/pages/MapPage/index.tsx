@@ -6,6 +6,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { GetSensors, UpdateSensorMarker, GetSensorMarker } from '../../api/Sensors';
 import { API, graphqlOperation } from 'aws-amplify';
 import { onCreateSensorValues } from '../../graphql/subscriptions';
+import { Container, Header, Box } from '@awsui/components-react';
 
 import './index.css'
 
@@ -114,7 +115,9 @@ const MapPage: React.FC = () => {
 
 
     return (
-        <div id='map' />
+        <Container>
+            <div id='map' />
+        </Container>
     )
 }
 
