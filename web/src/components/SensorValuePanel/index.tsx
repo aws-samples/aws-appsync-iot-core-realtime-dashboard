@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Box, Container, ColumnLayout, Spinner } from '@awsui/components-react';
 
 interface IProps {
-    value: number | null
+    value: number | null | undefined
 }
 
 const SensorValuePanel: React.FC<IProps> = ({value}: IProps) => {

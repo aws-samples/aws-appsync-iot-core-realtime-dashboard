@@ -4,7 +4,7 @@ import Spinner from "@awsui/components-react/spinner";
 
 interface IProps {
     title: string
-    value: number | null
+    value: number | null | undefined
 }
 
 interface IChartValue {

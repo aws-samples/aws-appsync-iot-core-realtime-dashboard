@@ -33,19 +33,20 @@ const SensorPage: React.FC = () => {
         id: string;
     }
 
-    const GetSelectedValue = () : number => {
+    const GetSelectedValue = () : number | null | undefined => {
 
-        let n = 0;
+        let n: number | null | undefined = null;
+
         let v = value?.value.data.onCreateSensorValue
 
         if (selectedSensor === 'temperature') {
-            n = v?.temperature as number
+            n = v?.temperature
         } else if (selectedSensor === 'salinity') {
-            n = v?.salinity as number
+            n = v?.salinity
         } else if (selectedSensor === 'disolvedO2') {
-            n = v?.disolvedO2 as number
+            n = v?.disolvedO2
         } else if (selectedSensor === 'ph') {
-            n = v?.pH as number
+            n = v?.pH
         }
 
         return n;
