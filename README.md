@@ -30,11 +30,9 @@ Click on a sensor to view the detailed values received in realtime from that spe
 
 1. An AWS account in which you have Administrator access.
 
-2. [Node.js](https://nodejs.org/en/download/) (^10.0) with NPM (^5.2)
+2. [Node.js](https://nodejs.org/en/download/) (^16.18.0) with NPM (^7.19.1)
 
-3. [Amplify CLI](https://aws-amplify.github.io/docs/) (^4.21.1).
-
-4. A [Mapbox](https://www.mapbox.com/) account with a free *Default Public Access Token*
+3. [Amplify CLI](https://aws-amplify.github.io/docs/) (^6.2.1).
 
 After you have installed and configured Amplify, take note of the AWS profile you selected during the configuration.  If you created a profile other than **default**, you will need the profile name for later steps in the deployment.
 
