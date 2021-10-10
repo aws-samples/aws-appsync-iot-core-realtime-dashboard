@@ -1,0 +1,10 @@
+{
+  "sensorId": "123",
+  "data": {
+        "pH": 1,
+        "temperature": 1,
+        "salinity": 1,
+        "disolvedO2": 1,
+        "timestamp": 1633829727
+  }
+}

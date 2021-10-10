@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "amplify:iotdashboardcreatesensorvalue": "babel src/graphql/mutations.ts -o amplify/backend/function/iotdashboardcreatesensorvalue/src/mutations.js"
+    "amplify:createsensorvalue": "babel src/graphql/mutations.ts -o amplify/backend/function/createsensorvalue/src/mutations.js"
   },
   "eslintConfig": {
     "extends": [
