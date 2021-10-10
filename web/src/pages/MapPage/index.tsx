@@ -6,7 +6,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { GetSensors, UpdateSensorMarker, GetSensorMarker } from '../../api/Sensors';
 import { API, graphqlOperation } from 'aws-amplify';
 import { onCreateSensorValues } from '../../graphql/subscriptions';
-import { Container } from '@awsui/components-react';
+import { Container, Box, Header, SpaceBetween } from '@awsui/components-react';
 
 import './index.css'
 
@@ -71,6 +71,8 @@ const MapPage: React.FC = () => {
                     maxZoom: 11
                 })
  
+                map.repaint = true;
+
                 console.log('Map Rendered')
 
                 await DisplaySensors(map)
@@ -111,9 +113,16 @@ const MapPage: React.FC = () => {
 
 
     return (
-        <Container>
-            <div id='map' />
-        </Container>
+        <Box margin={{ bottom: "l", top: "s" }} padding="xxs">
+            <SpaceBetween size="m">
+                <Header variant="h1">
+                    Sensor Map
+                </Header>
+                <Container>
+                    <div id='map'/>
+                </Container>
+            </SpaceBetween>
+        </Box>
     )
 }
 
