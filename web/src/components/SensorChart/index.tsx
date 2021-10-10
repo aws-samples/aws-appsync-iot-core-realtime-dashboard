@@ -15,13 +15,19 @@ interface IChartValue {
 const SensorChart: React.FC<IProps> = ({title, value}: IProps) => {
 
     const values = useRef<Array<IChartValue>>([])
+    const startDate = useRef(new Date())
+    const endDate = useRef(new Date())
 
     useEffect(() => {
 
+        const x = new Date()
+
         if (value) {
-            const x = new Date()
+            endDate.current = x
             values.current = [...values.current,{ x: x, y:value }]
         } else {
+            startDate.current = x
+            endDate.current = x
             values.current = []
         }
 
@@ -50,6 +56,7 @@ const SensorChart: React.FC<IProps> = ({title, value}: IProps) => {
                                       e.toISOString().substr(11, 8)
                                 }}
                                 yDomain={[0, 100]}
+                                xDomain={[startDate.current, endDate.current]}
                                 height={300}
                                 hideFilter
                                 xScaleType="time"
