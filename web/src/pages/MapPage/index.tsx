@@ -25,18 +25,15 @@ const MapPage: React.FC = () => {
 
     const history = useHistory();
 
-
     useEffect(() => {
 
         var map : Map;
 
-        // when sensor clicked - navigate to the sensor detail page
-        const sensorClicked = (sensorId : string) : void => {
-
-            var sensorImage = document.getElementById('sensor-image-' + sensorId)
-            
-            if (sensorImage){
-                history.push('/sensor/' + sensorId)
+        function sensorClicked (sensorId: string){
+            var sensorImage = document.getElementById('sensor-image-' + sensorId);
+    
+            if (sensorImage) {
+                history.push('/sensor/' + sensorId);
                 console.log(sensorId + ' clicked');
             }
         }
@@ -52,8 +49,7 @@ const MapPage: React.FC = () => {
                 
                 response.forEach( (sensor) => {
     
-                    var marker = GetSensorMarker(sensor.sensorId, sensor.status) 
-                    marker.onclick = () => sensorClicked(sensor.sensorId)
+                    var marker = GetSensorMarker(sensor.sensorId, sensor.status, () => sensorClicked(sensor.sensorId)) 
     
                     new Marker(marker)
                         .setLngLat([sensor.geo.longitude, sensor.geo.latitude])

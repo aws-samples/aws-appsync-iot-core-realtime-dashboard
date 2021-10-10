@@ -62,12 +62,13 @@ export const UpdateSensorMarker = (sensorId: string, status : number) => {
     }
 }
 
-export const GetSensorMarker = (sensorId: string, status : number | null) => {
+export const GetSensorMarker = (sensorId: string, status : number | null, onclick: any) => {
     
     var marker = document.createElement('div')
     marker.id = 'sensor-image-' + sensorId
     marker.className = "sensor"
-
+    marker.onclick = onclick
+    
     let r = GetSensorStatusColor(status)
 
     marker.style.backgroundColor = r
