@@ -1,6 +1,6 @@
 # aws-appsync-iot-core-realtime-dashboard
 
-This application demonstrates a web application dashboard receiving real-time updates from a series of IoT sensors.  It depicts a fictitious set of pH sensors deployed around the San Francisco Bay. The solution is built with React, AWS AppSync, and AWS IoT Core technologies.
+This application demonstrates a web application dashboard receiving real-time updates from a series of IoT sensors.  It depicts a fictitious set of pH sensors deployed around the San Francisco Bay. The solution is built with React, AWS AppSync, Amazon Location, AWS Amplify, and AWS IoT Core technologies.
 
 ![Image description](images/map.jpg)
 
@@ -66,7 +66,7 @@ $ amplify init
 
 ? Enter a name for the environment: mysandbox
 ? Choose your default editor: [select your favorite IDE]
-? Do you want to use an AWS profile? Yes
+? Select the authentication method you want to use: AWS Profile
 ? Please choose the profile you want to use: default
 ```
 
@@ -84,21 +84,21 @@ Current Environment: mysandbox
 ┌──────────────┬──────────────────────┬───────────┬───────────────────┐
 │ Category     │ Resource name        │ Operation │ Provider plugin   │
 ├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Auth         │ iotdashboard6b12339b │ No Change │ awscloudformation │
+│ Auth         │ iotdashboard6b12339b │ Create    │ awscloudformation │
 ├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Function     │ listsensors          │ No Change │ awscloudformation │
+│ Function     │ listsensors          │ Create    │ awscloudformation │
 ├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Function     │ getsensor            │ No Change │ awscloudformation │
+│ Function     │ getsensor            │ Create    │ awscloudformation │
 ├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Function     │ createsensorvalue    │ No Change │ awscloudformation │
+│ Function     │ createsensorvalue    │ Create    │ awscloudformation │
 ├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Api          │ iotdashboard         │ No Change │ awscloudformation │
+│ Api          │ iotdashboard         │ Create    │ awscloudformation │
 ├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Geo          │ iotdashboard         │ No Change │ awscloudformation │
+│ Geo          │ iotdashboard         │ Create    │ awscloudformation │
 ├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Iotrule      │ createsensorvalue    │ No Change │ awscloudformation │
+│ Iotrule      │ createsensorvalue    │ Create    │ awscloudformation │
 ├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Iotanalytics │ batch                │ No Change │ awscloudformation │
+│ Iotanalytics │ batch                │ Create    │ awscloudformation │
 └──────────────┴──────────────────────┴───────────┴───────────────────┘
 ```
 
@@ -107,6 +107,7 @@ Current Environment: mysandbox
 ```
 $ amplify push
 
+? Are you sure you want to continue? Y
 ? Do you want to update code for your updated GraphQL API (Y/n) Y
 
 ? This will overwrite your current graphql queries, mutations and subscriptions Y
