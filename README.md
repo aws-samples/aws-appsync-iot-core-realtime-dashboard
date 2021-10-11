@@ -20,7 +20,7 @@ Click on a sensor to view the detailed values received in realtime from that spe
 
 3. The Node.js Lambda function executes a GraphQL mutation in AppSync.  The mutation saves the sensor's value in DynamoDB and broadcasts the value in real-time to the web dashboard. The Lambda function uses an IAM role and policy to obtain permissions to interact with AppSync.
 
-4. The React web dashboard application is written in TypeScript and subscribes to the AppSync sensor subscriptions.  When new values are received, a map is updated in real-time to reflect the new sensor values. The application uses Cognito to authenticate users and allow them to perform the AppSync subscription. 
+4. The React web dashboard application is written in TypeScript and subscribes to the AppSync sensor subscriptions.  When new values are received, an Amazon Location Service map is updated in real-time to reflect the new sensor values. The application uses Cognito to authenticate users and allow them to perform the AppSync subscription. 
 
 5. The QuickSight dashboard generates charts and reports for Business Intelligence functions using data from the IoT Analytics timeseries optimized datastore. 
 
@@ -122,7 +122,7 @@ Resources being created in your account include:
 - Lambda Functions (3)
 - IoT Rule
 - IoT Analytic
-- Amazon Location Map
+- Amazon Location Service Map
 
 
 **Install the IoT sensor simulator**
