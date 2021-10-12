@@ -23,11 +23,18 @@ const SensorChart: React.FC<IProps> = ({title, value}: IProps) => {
         const x = new Date()
 
         if (value) {
-            endDate.current = x
+
+            // if initial chart time range exceeds size - push out by 5 minues
+            if (x >= endDate.current) {
+                endDate.current = new Date(x.getTime() + 3*60000)
+            }
+
             values.current = [...values.current,{ x: x, y:value }]
         } else {
+
+            // initialize chart with a 5 minute time range
             startDate.current = x
-            endDate.current = x
+            endDate.current = new Date(x.getTime() + 3*60000)
             values.current = []
         }
 
