@@ -9,3 +9,7 @@
     width: 1em;
     cursor: pointer;
 }
+
+html {
+    font-size: 1rem;
+}
