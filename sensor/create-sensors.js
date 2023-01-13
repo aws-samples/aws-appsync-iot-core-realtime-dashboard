@@ -1,14 +1,19 @@
-process.env.AWS_SDK_LOAD_CONFIG = true;
-
-const AWS = require('aws-sdk');
 const fs = require('fs').promises;
-
-//if a region is not specified in your local AWS config, it will default to us-east-1
-const REGION = AWS.config.region || 'us-east-1';
+const {
+  IoTClient,
+  DescribeEndpointCommand,
+  UpdateIndexingConfigurationCommand,
+  CreatePolicyCommand,
+  CreateKeysAndCertificateCommand,
+  CreateThingTypeCommand,
+  CreateThingCommand,
+  AttachPolicyCommand,
+  AttachThingPrincipalCommand
+} = require("@aws-sdk/client-iot");
 
 //if you wish to use a profile other than default, set an AWS_PROFILE environment variable when you run this app
 //for example:
-//AWS_PROFILE=my-aws-profile node create-sensor.js
+//AWS_PROFILE=my-aws-profile node create-sensors.js
 const PROFILE = process.env.AWS_PROFILE || 'default';
 
 //constants used in the app - do not change
@@ -21,25 +26,18 @@ const ROOT_CA_FILE = 'AmazonRootCA1.pem';
 var sensors = require(SENSORS_FILE);
 const policyDocument = require(POLICY_FILE);
 
-//use the credentials from the AWS profile
-var credentials = new AWS.SharedIniFileCredentials({profile: PROFILE});
-AWS.config.credentials = credentials;
-
-AWS.config.update({
-    region: REGION
-});
-
 async function createSensors(){
 
   try {
 
-    var iot = new AWS.Iot();
+    const iotClient = new IoTClient({ profile: PROFILE });
   
     // get the regional IOT endpoint
     var params = { endpointType: 'iot:Data-ATS'};
-    var result = await iot.describeEndpoint(params).promise();
-    const host = result.endpointAddress;
-  
+    var command = new DescribeEndpointCommand(params);
+    const response = await iotClient.send(command);
+    const host = response.endpointAddress;
+
     //enable thing fleet indexing to enable searching things
     params = {
       thingIndexingConfiguration: { 
@@ -47,7 +45,8 @@ async function createSensors(){
       }
     }
 
-    result = await iot.updateIndexingConfiguration(params).promise();
+    command = new UpdateIndexingConfigurationCommand(params)
+    var result = await iotClient.send(command)
 
     //iterate over all sensors and create policies, certs, and things
     sensors.forEach(async (sensor) => {
@@ -58,12 +57,13 @@ async function createSensors(){
         //create the IOT policy
         var policyName = 'Policy-' + sensor.settings.clientId;
         var policy = { policyName: policyName, policyDocument: JSON.stringify(policyDocument)};
-        result = await iot.createPolicy(policy).promise()
+        command = new CreatePolicyCommand(policy)
+        result = await iotClient.send(command)
 
         //create the certificates
-        result = await iot.createKeysAndCertificate({setAsActive:true}).promise();
+        command = new CreateKeysAndCertificateCommand({setAsActive:true});
+        result = await iotClient.send(command)
         sensor.settings.certificateArn = result.certificateArn;
-        const certificateArn = result.certificateArn;
         const certificatePem = result.certificatePem;
         const privateKey = result.keyPair.PrivateKey;
 
@@ -80,11 +80,13 @@ async function createSensors(){
         //save the AWS root certificate
         sensor.settings.caPath = CERT_FOLDER + ROOT_CA_FILE;
       
-        //create the thing type
+        // //create the thing type
         params = {
           thingTypeName: sensor.thingTypeName
         }
-        await iot.createThingType(params).promise();
+
+        command = new CreateThingTypeCommand(params)
+        result = await iotClient.send(command)
 
         //create the thing
         params = {
@@ -100,13 +102,16 @@ async function createSensors(){
           thingTypeName: sensor.thingTypeName
         };
 
-        await iot.createThing(params).promise();
+        command = new CreateThingCommand(params)
+        await iotClient.send(command)
 
         //attach policy to certificate
-        await iot.attachPolicy({ policyName: policyName, target: certificateArn}).promise();
+        command = new AttachPolicyCommand({ policyName: policyName, target: sensor.settings.certificateArn})
+        await iotClient.send(command)
             
         //attach thing to certificate
-        await iot.attachThingPrincipal({thingName: sensor.settings.clientId, principal: certificateArn}).promise();
+        command = new AttachThingPrincipalCommand({thingName: sensor.settings.clientId, principal: sensor.settings.certificateArn})
+        await iotClient.send(command)
 
         //save the updated settings file
         let data = JSON.stringify(sensors, null, 2);
@@ -115,7 +120,6 @@ async function createSensors(){
 
     //display results
     console.log('IoT Things provisioned');
-    console.log('AWS Region: ' + REGION);
     console.log('AWS Profile: ' + PROFILE);
 
     sensors.forEach((sensor) => {
@@ -124,7 +128,6 @@ async function createSensors(){
 
   }
   catch (err) {
-
     console.log('Error creating sensors');
     console.log(err.message);
   }

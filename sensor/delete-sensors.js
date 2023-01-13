@@ -1,14 +1,17 @@
-process.env.AWS_SDK_LOAD_CONFIG = true;
-
-const AWS = require('aws-sdk');
 const fs = require('fs').promises;
-
-//if a region is not specified in your local AWS config, it will default to us-east-1
-const REGION = AWS.config.region || 'us-east-1';
+const {
+  IoTClient,
+  DetachThingPrincipalCommand,
+  DeleteThingCommand,
+  DetachPolicyCommand,
+  DeletePolicyCommand,
+  UpdateCertificateCommand,
+  DeleteCertificateCommand
+} = require("@aws-sdk/client-iot");
 
 //if you wish to use a profile other than default, set an AWS_PROFILE environment variable when you run this app
 //for example:
-//AWS_PROFILE=my-aws-profile node create-sensor.js
+//AWS_PROFILE=my-aws-profile node delete-sensors.js
 const PROFILE = process.env.AWS_PROFILE || 'default';
 
 //constants used in the app - do not change
@@ -17,19 +20,11 @@ const SENSORS_FILE = './sensors.json';
 //open sensor definition file
 var sensors = require(SENSORS_FILE);
 
-//use the credentials from the AWS profile
-var credentials = new AWS.SharedIniFileCredentials({profile: PROFILE});
-AWS.config.credentials = credentials;
-
-AWS.config.update({
-    region: REGION
-});
-
 async function deleteSensors(){
 
   try {
 
-    var iot = new AWS.Iot();
+    const iotClient = new IoTClient({ profile: PROFILE });
   
     //iterate over all sensors and create policies, certs, and things
     sensors.forEach(async (sensor) => {
@@ -38,22 +33,29 @@ async function deleteSensors(){
         sensor.settings.host = "";
     
         //attach thing to certificate
-        await iot.detachThingPrincipal({thingName: sensor.settings.clientId, principal: sensor.settings.certificateArn}).promise();
+        var command = new DetachThingPrincipalCommand({thingName: sensor.settings.clientId, principal: sensor.settings.certificateArn})
+        await iotClient.send(command)
 
         //delete the thing
-        await iot.deleteThing({thingName: sensor.settings.clientId}).promise();
+        command = new DeleteThingCommand({thingName: sensor.settings.clientId})
+        await iotClient.send(command)
 
         //detach policy from certificate
         var policyName = 'Policy-' + sensor.settings.clientId;
-        await iot.detachPolicy({ policyName: policyName, target: sensor.settings.certificateArn}).promise();
+        command = new DetachPolicyCommand({ policyName: policyName, target: sensor.settings.certificateArn})
+        await iotClient.send(command)
 
         //delete the IOT policy
-        result = await iot.deletePolicy({policyName: policyName}).promise()
+        command = new DeletePolicyCommand({policyName: policyName})
+        await iotClient.send(command)
 
         //delete the certificates
         var certificateId = sensor.settings.certificateArn.split('/')[1];
-        result = await iot.updateCertificate({certificateId:certificateId, newStatus:"INACTIVE"}).promise();
-        result = await iot.deleteCertificate({certificateId:certificateId, forceDelete:true}).promise();
+        command = new UpdateCertificateCommand({certificateId:certificateId, newStatus:"INACTIVE"})
+        await iotClient.send(command)
+
+        command = new DeleteCertificateCommand({certificateId:certificateId, forceDelete:true})
+        await iotClient.send(command)
         sensor.settings.certificateArn = ""
 
         //delete the certificate files
@@ -71,7 +73,6 @@ async function deleteSensors(){
 
     //display results
     console.log('IoT Things removed: ' + sensors.length);
-    console.log('AWS Region: ' + REGION);
     console.log('AWS Profile: ' + PROFILE);
 
     sensors.forEach((sensor) => {

@@ -27,12 +27,15 @@ Click on a sensor to view the detailed values received in realtime from that spe
 ## Getting Started
 
 ### **Prerequisites**
+The following software was used in the development of this application.  While it may work with alternative versions, we recommend you deploy the specified minimum version.
 
 1. An AWS account in which you have Administrator access.
 
-2. [Node.js](https://nodejs.org/en/download/) (^16.18.0) with NPM (^7.19.1)
+2. [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) (2.4.19) the AWS Command Line Interface (CLI) is used to configure your connection credentials to AWS.  These credentials are used by the CDK, Amplify, and the CLI.
 
-3. [Amplify CLI](https://aws-amplify.github.io/docs/) (^6.2.1).
+3. [Node.js](https://nodejs.org/en/download/) (^16.8.1) with NPM (^8.12.2)
+
+4. [Amplify CLI](https://docs.amplify.aws/cli/start/install) (^10.6.1) Amplify is used to create the AWS AppSync API and generate the client side Swift code to interact with AWS.
 
 After you have installed and configured Amplify, take note of the AWS profile you selected during the configuration.  If you created a profile other than **default**, you will need the profile name for later steps in the deployment.
 
@@ -138,14 +141,14 @@ $ npm install
 $ node create-sensors.js
 ```
 
-_*Note - this will create the sensor using your default AWS profile account and region.  If you have not specified a default region in your local AWS configuration, it will default to us-east-1._
+*Note - this will create the sensors using your default AWS CLI profile*
 
 If you do not have a **default** profile or you are using a profile other than **default**, run the app with an AWS_PROFILE environment variable specifiying the profile name you would like to use.
 
 Replace [my-aws-profile] with the name of your profile:
 
 ```
-$ AWS_PROFILE=[my-aws-profile] node create-sensor.js
+$ AWS_PROFILE=[my-aws-profile] node create-sensors.js
 ```
 
 ## Run the Web App
@@ -242,6 +245,16 @@ From the **sensor** folder:
 
 ```
 $ node delete-sensors.js
+```
+
+*Note - this will delete the sensors using your default AWS CLI profile*
+
+If you do not have a **default** profile or you are using a profile other than **default**, run the app with an AWS_PROFILE environment variable specifiying the profile name you would like to use.
+
+Replace [my-aws-profile] with the name of your profile:
+
+```
+$ AWS_PROFILE=[my-aws-profile] node delete-sensors.js
 ```
 
 ## Troubleshooting
