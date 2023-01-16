@@ -123,10 +123,10 @@ From the app's **sensor** folder:
 
 ```
 $ npm install
-$ node create-sensors.js [--profile]
+$ node create-sensors.js [--profile] [--region]
 ```
 
-*Note - the profile argument is optional. If not specified the app will create the sensors using your default AWS Profile*
+*Note - the profile and region arguments are optional. If not specified the app will create the sensors using your default AWS Profile in us-east-1*
 
 ## Run the web app
 
@@ -179,10 +179,10 @@ $ amplify delete
 From the **sensor** folder:
 
 ```
-$ node delete-sensors.js [--profile]
+$ node delete-sensors.js [--profile] [--region]
 ```
 
-*Note - the profile argument is optional. If not specified the app will delete the sensors using your default AWS Profile*
+*Note - the profile and region arguments are optional. If not specified the app will delete the sensors using your default AWS Profile in us-east-1*
 
 ## License
 
