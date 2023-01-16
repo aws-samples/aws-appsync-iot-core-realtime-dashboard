@@ -16,7 +16,7 @@ The sensors are represented as the colored dots.  Their color will fluxuate betw
 
 3. The Node.js Lambda function executes a GraphQL mutation in AppSync.  The mutation saves the sensor's value in DynamoDB and broadcasts the value in real-time to the web dashboard. The Lambda function uses an IAM role and policy to obtain permissions to interact with AppSync.
 
-4. The React web dashboard application is written in TypeScript and subscribes to the AppSync sensor subscriptions.  When new values are received, an Amazon Location Service map is updated in real-time to reflect the new sensor values. The application uses Cognito to authenticate users and allow them to perform the AppSync subscription. 
+4. The React web dashboard application is written in JavaScript and subscribes to the AppSync sensor subscriptions.  When new values are received, an Amazon Location Service map is updated in real-time to reflect the new sensor values. The application uses Cognito to authenticate users and allow them to perform the AppSync subscription. 
 
 ## Getting Started
 
@@ -58,7 +58,7 @@ $ npm install
 ```
 $ amplify init
 
-? Enter a name for the environment: mysandbox
+? Enter a name for the environment: dev
 ? Choose your default editor: [select your favorite IDE]
 ? Select the authentication method you want to use: AWS Profile
 ? Please choose the profile you want to use: default
@@ -109,11 +109,9 @@ Resources being created in your account include:
 - AppSync GraphQL API
 - DynamoDB Table
 - Cognito User Pool
-- Lambda Functions (3)
+- Lambda Functions (2)
 - IoT Rule
-- IoT Analytic
 - Amazon Location Service Map
-
 
 **Install the IoT sensor simulator**
 
@@ -138,9 +136,9 @@ Replace [my-aws-profile] with the name of your profile:
 $ AWS_PROFILE=[my-aws-profile] node create-sensors.js
 ```
 
-## Run the Web App
+## Run the web app
 
-**Start the IoT Sensor**
+**Start the IoT sensor**
 
 From the **sensor** terminal window:
 
@@ -171,7 +169,7 @@ The web app requires users to authenticate via Cognito.  The first screen you wi
 
 Cognito will then email you a confirmation code.  Enter this code into the subsequent confirmation screen and logon to the app with your credentials.
 
-**Use the Web App**
+**Use the web app**
 
 You should now see a screen similar to the one at the top of this guide.  If you look at the terminal window running the sensor app, you shoud see the values being published to the Cloud reflected in the web app's sensor icon in real-time.
 
