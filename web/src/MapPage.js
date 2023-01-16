@@ -54,7 +54,7 @@ const MapPage = () => {
             try {
                 map = await createMap({
                     container: "map",
-                    center: [-122.2000, 37.70000],
+                    center: [-122.2000, 37.70500],
                     zoom: 11,
                     maxZoom: 11
                 })

@@ -123,18 +123,10 @@ From the app's **sensor** folder:
 
 ```
 $ npm install
-$ node create-sensors.js
+$ node create-sensors.js [--profile]
 ```
 
-*Note - this will create the sensors using your default AWS CLI profile*
-
-If you do not have a **default** profile or you are using a profile other than **default**, run the app with an AWS_PROFILE environment variable specifiying the profile name you would like to use.
-
-Replace [my-aws-profile] with the name of your profile:
-
-```
-$ AWS_PROFILE=[my-aws-profile] node create-sensors.js
-```
+*Note - the profile argument is optional. If not specified the app will create the sensors using your default AWS Profile*
 
 ## Run the web app
 
@@ -187,18 +179,10 @@ $ amplify delete
 From the **sensor** folder:
 
 ```
-$ node delete-sensors.js
+$ node delete-sensors.js [--profile]
 ```
 
-*Note - this will delete the sensors using your default AWS CLI profile*
-
-If you do not have a **default** profile or you are using a profile other than **default**, run the app with an AWS_PROFILE environment variable specifiying the profile name you would like to use.
-
-Replace [my-aws-profile] with the name of your profile:
-
-```
-$ AWS_PROFILE=[my-aws-profile] node delete-sensors.js
-```
+*Note - the profile argument is optional. If not specified the app will delete the sensors using your default AWS Profile*
 
 ## License
 

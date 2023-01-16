@@ -9,10 +9,7 @@ const {
   DeleteCertificateCommand
 } = require("@aws-sdk/client-iot");
 
-//if you wish to use a profile other than default, set an AWS_PROFILE environment variable when you run this app
-//for example:
-//AWS_PROFILE=my-aws-profile node delete-sensors.js
-const PROFILE = process.env.AWS_PROFILE || 'default';
+const { ArgumentParser } = require('argparse');
 
 //constants used in the app - do not change
 const SENSORS_FILE = './sensors.json';
@@ -20,11 +17,11 @@ const SENSORS_FILE = './sensors.json';
 //open sensor definition file
 var sensors = require(SENSORS_FILE);
 
-async function deleteSensors(){
+async function deleteSensors(profile){
 
   try {
 
-    const iotClient = new IoTClient({ profile: PROFILE });
+    const iotClient = new IoTClient({ profile: profile });
   
     //iterate over all sensors and create policies, certs, and things
     sensors.forEach(async (sensor) => {
@@ -73,7 +70,7 @@ async function deleteSensors(){
 
     //display results
     console.log('IoT Things removed: ' + sensors.length);
-    console.log('AWS Profile: ' + PROFILE);
+    console.log('AWS Profile: ' + profile);
 
     sensors.forEach((sensor) => {
       console.log('Thing Name: ' + sensor.settings.clientId);
@@ -87,4 +84,12 @@ async function deleteSensors(){
   }
 }
 
-deleteSensors();
+// parse for profile command line arguent
+const parser = new ArgumentParser({
+  description: 'Deletes IoT Things for sensors defined in sensors.json'
+});
+
+parser.add_argument('--profile', {default: 'default'});
+args = parser.parse_args()
+
+deleteSensors(args.profile);
