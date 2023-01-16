@@ -115,8 +115,9 @@ const MapPage = () => {
 
     return (
         <div id='container'>
-            <div id='map' className='fullscreen-map' />
             <div id='banner'>Bay Health</div>
+            <div id='map' className='fullscreen-map' />
+
         </div>
     );
 }
