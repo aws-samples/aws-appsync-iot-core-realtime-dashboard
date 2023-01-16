@@ -17,11 +17,11 @@ const SENSORS_FILE = './sensors.json';
 //open sensor definition file
 var sensors = require(SENSORS_FILE);
 
-async function deleteSensors(profile){
+async function deleteSensors(profile, region){
 
   try {
 
-    const iotClient = new IoTClient({ profile: profile });
+    const iotClient = new IoTClient({ profile: profile, region: region });
   
     //iterate over all sensors and create policies, certs, and things
     sensors.forEach(async (sensor) => {
@@ -71,6 +71,7 @@ async function deleteSensors(profile){
     //display results
     console.log('IoT Things removed: ' + sensors.length);
     console.log('AWS Profile: ' + profile);
+    console.log('AWS Region: ' + region);
 
     sensors.forEach((sensor) => {
       console.log('Thing Name: ' + sensor.settings.clientId);
@@ -78,7 +79,6 @@ async function deleteSensors(profile){
 
   }
   catch (err) {
-
     console.log('Error deleting sensors');
     console.log(err.message);
   }
@@ -90,6 +90,8 @@ const parser = new ArgumentParser({
 });
 
 parser.add_argument('--profile', {default: 'default'});
+parser.add_argument('--region', {default: 'us-east-1'});
+
 args = parser.parse_args()
 
-deleteSensors(args.profile);
+deleteSensors(args.profile, args.region);

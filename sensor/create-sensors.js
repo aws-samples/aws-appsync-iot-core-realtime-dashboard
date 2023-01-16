@@ -23,11 +23,11 @@ const ROOT_CA_FILE = 'AmazonRootCA1.pem';
 var sensors = require(SENSORS_FILE);
 const policyDocument = require(POLICY_FILE);
 
-async function createSensors(profile){
+async function createSensors(profile, region){
 
   try {
 
-    const iotClient = new IoTClient({ profile: profile });
+    const iotClient = new IoTClient({ profile: profile, region: region });
   
     // get the regional IOT endpoint
     var params = { endpointType: 'iot:Data-ATS'};
@@ -118,6 +118,7 @@ async function createSensors(profile){
     //display results
     console.log('IoT Things provisioned');
     console.log('AWS Profile: ' + profile);
+    console.log('AWS Region: ' + region);
 
     sensors.forEach((sensor) => {
       console.log('Thing Name: ' + sensor.settings.clientId);
@@ -137,6 +138,8 @@ const parser = new ArgumentParser({
 });
 
 parser.add_argument('--profile', {default: 'default'});
+parser.add_argument('--region', {default: 'us-east-1'});
+
 args = parser.parse_args()
 
-createSensors(args.profile);
+createSensors(args.profile, args.region);
