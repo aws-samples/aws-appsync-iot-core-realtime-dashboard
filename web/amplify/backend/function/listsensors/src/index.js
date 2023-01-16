@@ -1,11 +1,9 @@
-const AWS = require('aws-sdk');
-const iotClient = new AWS.Iot();
+const {
+    IoTClient,
+    SearchIndexCommand
+} = require("@aws-sdk/client-iot");
 
-var region = process.env.REGION;
-
-AWS.config.update({
-    region: region
-});
+const iotClient = new IoTClient();
 
 exports.handler = async (event) => {
 
@@ -18,9 +16,11 @@ exports.handler = async (event) => {
         queryString: 'shadow.reported.name:* AND thingTypeName:WATER_QUALITY_SENSOR'
     };
 
+    var command = new SearchIndexCommand(params);
+
     try {
 
-        var result = await iotClient.searchIndex(params).promise();
+        var result = await iotClient.send(command)
 
         //build an array of the thing shadow values and return array
         result.things.forEach(element => {

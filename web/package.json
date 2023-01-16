@@ -3,34 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@aws-amplify/ui-react": "^1.2.19",
-    "@awsui/components-react": "^3.0.287",
-    "@awsui/global-styles": "^1.0.9",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/jest": "^26.0.24",
-    "@types/node": "^12.20.28",
-    "@types/react": "^17.0.27",
-    "@types/react-dom": "^17.0.9",
-    "@types/react-router-dom": "^5.3.1",
-    "aws-amplify": "^4.3.1",
-    "install": "^0.13.0",
-    "maplibre-gl": "^1.15.2",
-    "maplibre-gl-js-amplify": "^1.1.0",
-    "npm": "^8.11.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.2"
+    "@aws-amplify/ui-react": "^4.3.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "aws-amplify": "^5.0.10",
+    "maplibre-gl": "^2.4.0",
+    "maplibre-gl-js-amplify": "^3.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "amplify:createsensorvalue": "babel src/graphql/mutations.ts -o amplify/backend/function/createsensorvalue/src/mutations.js"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -51,9 +39,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.15.8",
-    "@babel/preset-env": "^7.15.8",
-    "typescript": "^4.4.3"
+    "react-scripts": "^5.0.1"
   }
 }

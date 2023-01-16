@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "bayhealth",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authweb1b7b454d",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

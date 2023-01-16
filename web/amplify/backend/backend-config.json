@@ -1,108 +1,154 @@
 {
-  "auth": {
-    "iotdashboard6b12339b": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false,
-      "frontendAuthConfig": {
-        "loginMechanisms": [
-          "PREFERRED_USERNAME"
-        ],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      }
-    }
-  },
-  "function": {
-    "listsensors": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "getsensor": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "createsensorvalue": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
+  "api": {
+    "bayhealth": {
       "dependsOn": [
         {
-          "category": "api",
-          "resourceName": "iotdashboard",
           "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "web1b7b454d"
         }
-      ]
-    }
-  },
-  "api": {
-    "iotdashboard": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
+      ],
       "output": {
         "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authiotdashboard6b12339b"
-            }
-          },
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AWS_IAM"
             }
-          ]
+          ],
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authweb1b7b454d"
+            }
+          }
         }
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "web1b7b454d": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "custom": {
+    "iotrule": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "Region",
+            "LambdaExecutionRole",
+            "LambdaExecutionRoleArn"
+          ],
+          "category": "function",
+          "resourceName": "createsensorvalue"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "customCDK"
+    }
+  },
+  "function": {
+    "createsensorvalue": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "bayhealth"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "listsensors": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "geo": {
-    "iotdashboard": {
+    "map0102348f": {
+      "accessType": "AuthorizedUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "web1b7b454d"
+        }
+      ],
       "isDefault": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
       "mapStyle": "VectorEsriDarkGrayCanvas",
-      "pricingPlan": "RequestBasedUsage",
-      "accessType": "AuthorizedUsers"
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
     }
   },
-	"iotrule": {
-		"createsensorvalue": {
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [
-				{
-					"category": "function",
-					"resourceName": "createsensorvalue",
-					"attributes": [
-						"Arn"
-					]
-				}
-			]
-		}
-	},
-	"iotanalytics": {
-		"batch": {
-			"service": "IotAnalytics",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": []
-		}
-	}
+  "parameters": {
+    "AMPLIFY_function_createsensorvalue_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createsensorvalue"
+        }
+      ]
+    },
+    "AMPLIFY_function_createsensorvalue_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "createsensorvalue"
+        }
+      ]
+    },
+    "AMPLIFY_function_listsensors_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "listsensors"
+        }
+      ]
+    },
+    "AMPLIFY_function_listsensors_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "listsensors"
+        }
+      ]
+    }
+  }
 }

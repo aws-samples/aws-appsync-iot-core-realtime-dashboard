@@ -1,0 +1,32 @@
+#container {
+    height: 100%;
+}
+  
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+#banner {
+    font-size: 35px;
+    padding: 15px;
+    color: #ffffff;
+    opacity: 75%;
+    background-color: #1D1C1B;
+}
+
+.sensor {
+    border-radius: 50%;
+    height: 2em;
+    width: 2em;
+    cursor: pointer;
+}
+
+.fullscreen-map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}

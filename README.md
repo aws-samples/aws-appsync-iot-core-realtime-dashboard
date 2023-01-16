@@ -6,10 +6,6 @@ This application demonstrates a web application dashboard receiving real-time up
 
 The sensors are represented as the colored dots.  Their color will fluxuate between red, green, and yellow based on the messages received from the sensors.
 
-Click on a sensor to view the detailed values received in realtime from that specific sensor.
-
-![Image description](images/sensor.jpg)
-
 ## Architecture
 
 ![Image description](images/architecture.jpg)
@@ -22,11 +18,9 @@ Click on a sensor to view the detailed values received in realtime from that spe
 
 4. The React web dashboard application is written in TypeScript and subscribes to the AppSync sensor subscriptions.  When new values are received, an Amazon Location Service map is updated in real-time to reflect the new sensor values. The application uses Cognito to authenticate users and allow them to perform the AppSync subscription. 
 
-5. The QuickSight dashboard generates charts and reports for Business Intelligence functions using data from the IoT Analytics timeseries optimized datastore. 
-
 ## Getting Started
 
-### **Prerequisites**
+## **Prerequisites**
 The following software was used in the development of this application.  While it may work with alternative versions, we recommend you deploy the specified minimum version.
 
 1. An AWS account in which you have Administrator access.
@@ -39,10 +33,7 @@ The following software was used in the development of this application.  While i
 
 After you have installed and configured Amplify, take note of the AWS profile you selected during the configuration.  If you created a profile other than **default**, you will need the profile name for later steps in the deployment.
 
-### **Installing**
-
-If you run into issues installing or configuring anything in this project please checkout the [Troubleshooting](#troubleshooting) section below.
-
+## **Installation**
 
 **Clone this code repository**
 
@@ -82,27 +73,23 @@ Once your account has been provisioned, entering the 'amplify status' command wi
 ```
 $ amplify status
 
-Current Environment: mysandbox
+Current Environment: dev
 
-┌──────────────┬──────────────────────┬───────────┬───────────────────┐
-│ Category     │ Resource name        │ Operation │ Provider plugin   │
-├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Auth         │ iotdashboard6b12339b │ Create    │ awscloudformation │
-├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Function     │ listsensors          │ Create    │ awscloudformation │
-├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Function     │ getsensor            │ Create    │ awscloudformation │
-├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Function     │ createsensorvalue    │ Create    │ awscloudformation │
-├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Api          │ iotdashboard         │ Create    │ awscloudformation │
-├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Geo          │ iotdashboard         │ Create    │ awscloudformation │
-├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Iotrule      │ createsensorvalue    │ Create    │ awscloudformation │
-├──────────────┼──────────────────────┼───────────┼───────────────────┤
-│ Iotanalytics │ batch                │ Create    │ awscloudformation │
-└──────────────┴──────────────────────┴───────────┴───────────────────┘
+┌──────────┬───────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name     │ Operation │ Provider plugin   │
+├──────────┼───────────────────┼───────────┼───────────────────┤
+│ Api      │ bayhealth         │ Create    │ awscloudformation │
+├──────────┼───────────────────┼───────────┼───────────────────┤
+│ Auth     │ web1b7b454d       │ Create    │ awscloudformation │
+├──────────┼───────────────────┼───────────┼───────────────────┤
+│ Custom   │ iotrule           │ Create    │ awscloudformation │
+├──────────┼───────────────────┼───────────┼───────────────────┤
+│ Function │ createsensorvalue │ Create    │ awscloudformation │
+├──────────┼───────────────────┼───────────┼───────────────────┤
+│ Function │ listsensors       │ Create    │ awscloudformation │
+├──────────┼───────────────────┼───────────┼───────────────────┤
+│ Geo      │ map0102348f       │ Create    │ awscloudformation │
+└──────────┴───────────────────┴───────────┴───────────────────┘
 ```
 
 **Deploy the app infrastructure to your AWS account**
@@ -186,49 +173,7 @@ Cognito will then email you a confirmation code.  Enter this code into the subse
 
 **Use the Web App**
 
-You should now see a screen similar to the one at the top of this guide.  If you look at the terminal window running the sensor app, you shoud see the values being published to the Cloud reflected in the web app's sensor gauge in real-time.
-
-From the initial map screen, click on a sensor to navigate to the sensor's detail page.
-
-## Build the QuickSight BI Dashboard
-
-Sensor data has been transmitted to both the real-time dashboard and IoT Analytics.  We will now use IoT Analytics to build a BI dash board using **QuickSight**.
-
-Logon to the AWS Console and navigate to the **IoT Analytics** service and select **Data sets** from the menu.
-
-Select the **bayhealth_app_dataset**
-
-
-![Image description](images/datasets.jpg)
-
-
-From the **Actions** menu select **Run now** to refresh the data set.
-
-
-![Image description](images/datasetrun.jpg)
-
-
-From the AWS Console navigate to the AWS QuickSight service in the North Virginia region.
-
-If you have not registered for QuickSight in your account follow these instructions to configure the service:
-
-- Enroll for standard edition (if you have not used it before)
-- Click on your login user (upper right) -> Manage QuickSight -> Account Settings -> Add and Remove -> Check IoT Analytics -> Apply
-- Click on QuickSight logo (upper left) to navigate to home page 
-- Change the region to your working region
-
-From the QuickSight menu:
-
-- Select New Analysis -> New data set -> Choose AWS IOT Analytics
-- Select an AWS IoT Analytics dataset to import - Choose **bayhealth_app_dataset**
-- Click Create data source -> Visualize
-- Select items from the **Field List** to visulaize 
-    - Choose sensorId for Y axis 
-    - Choose all the sensor readings for Value axis
-    - Choose average from Value drop down
-
-![Image description](images/quicksight.jpg)
-
+You should now see a screen similar to the one at the top of this guide.  If you look at the terminal window running the sensor app, you shoud see the values being published to the Cloud reflected in the web app's sensor icon in real-time.
 
 ## Cleanup
 
@@ -256,15 +201,6 @@ Replace [my-aws-profile] with the name of your profile:
 ```
 $ AWS_PROFILE=[my-aws-profile] node delete-sensors.js
 ```
-
-## Troubleshooting
-
-**Installing Amplify**
-```
-$ npm install -g @aws-amplify/cli
-```
-
-If you receive EACCES permisisons errors, make sure your system is setup properly to install global packages.  See this [Guide for options](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
 
 ## License
 
