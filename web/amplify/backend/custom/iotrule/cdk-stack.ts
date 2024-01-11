@@ -39,7 +39,7 @@ export class cdkStack extends cdk.Stack {
       }
     );
 
-    new iot.CfnTopicRule(this, 'CreateSensorValueRule', {
+    const rule = new iot.CfnTopicRule(this, 'CreateSensorValueRule', {
       topicRulePayload: {
         sql: "select * as data, topic(4) as sensorId from 'dt/bay-health/SF/+/sensor-value'",
         actions: [ 
@@ -52,5 +52,9 @@ export class cdkStack extends cdk.Stack {
       },
     });
 
+    createSensorValueFunction.addPermission('AllowIoTInvoke', {
+      principal: new iam.ServicePrincipal('iot.amazonaws.com'),
+      sourceArn: rule.attrArn
+    });
   }
 }
