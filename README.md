@@ -25,11 +25,11 @@ The following software was used in the development of this application.  While i
 
 1. An AWS account in which you have Administrator access.
 
-2. [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) (2.4.19) the AWS Command Line Interface (CLI) is used to configure your connection credentials to AWS.  These credentials are used by the CDK, Amplify, and the CLI.
+2. [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) (v2.15.3) the AWS Command Line Interface (CLI) is used to configure your connection credentials to AWS.  These credentials are used by the CDK, Amplify, and the CLI.
 
-3. [Node.js](https://nodejs.org/en/download/) (^16.8.1) with NPM (^8.12.2)
+3. [Node.js](https://nodejs.org/en/download/) (v18.19.0) with NPM (v10.1.0)
 
-4. [Amplify CLI](https://docs.amplify.aws/cli/start/install) (^10.6.1) Amplify is used to create the AWS AppSync API and generate the client side Swift code to interact with AWS.
+4. [Amplify CLI](https://docs.amplify.aws/cli/start/install) (v12.10.1) Amplify is used to create the AWS AppSync API and generate the client side Swift code to interact with AWS.
 
 After you have installed and configured Amplify, take note of the AWS profile you selected during the configuration.  If you created a profile other than **default**, you will need the profile name for later steps in the deployment.
 
@@ -78,17 +78,17 @@ Current Environment: dev
 ┌──────────┬───────────────────┬───────────┬───────────────────┐
 │ Category │ Resource name     │ Operation │ Provider plugin   │
 ├──────────┼───────────────────┼───────────┼───────────────────┤
-│ Api      │ bayhealth         │ Create    │ awscloudformation │
+│ Auth     │ web27eb814a       │ Create    │ awscloudformation │
 ├──────────┼───────────────────┼───────────┼───────────────────┤
-│ Auth     │ web1b7b454d       │ Create    │ awscloudformation │
+│ Geo      │ map4a1c588e       │ Create    │ awscloudformation │
 ├──────────┼───────────────────┼───────────┼───────────────────┤
-│ Custom   │ iotrule           │ Create    │ awscloudformation │
-├──────────┼───────────────────┼───────────┼───────────────────┤
-│ Function │ createsensorvalue │ Create    │ awscloudformation │
+│ Api      │ sensorsapi        │ Create    │ awscloudformation │
 ├──────────┼───────────────────┼───────────┼───────────────────┤
 │ Function │ listsensors       │ Create    │ awscloudformation │
 ├──────────┼───────────────────┼───────────┼───────────────────┤
-│ Geo      │ map0102348f       │ Create    │ awscloudformation │
+│ Function │ createsensorvalue │ Create    │ awscloudformation │
+├──────────┼───────────────────┼───────────┼───────────────────┤
+│ Custom   │ iotrule           │ Create    │ awscloudformation │
 └──────────┴───────────────────┴───────────┴───────────────────┘
 ```
 
