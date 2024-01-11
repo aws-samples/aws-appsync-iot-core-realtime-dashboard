@@ -1,13 +1,13 @@
 {
   "api": {
-    "bayhealth": {
+    "sensorsapi": {
       "dependsOn": [
         {
           "attributes": [
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "web1b7b454d"
+          "resourceName": "web27eb814a"
         }
       ],
       "output": {
@@ -20,7 +20,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authweb1b7b454d"
+              "userPoolId": "authweb27eb814a"
             }
           }
         }
@@ -30,7 +30,7 @@
     }
   },
   "auth": {
-    "web1b7b454d": {
+    "web27eb814a": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -46,9 +46,7 @@
           "EMAIL"
         ],
         "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
+        "usernameAttributes": [],
         "verificationMechanisms": [
           "EMAIL"
         ]
@@ -86,7 +84,7 @@
             "GraphQLAPIEndpointOutput"
           ],
           "category": "api",
-          "resourceName": "bayhealth"
+          "resourceName": "sensorsapi"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -94,13 +92,12 @@
     },
     "listsensors": {
       "build": true,
-      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "geo": {
-    "map0102348f": {
+    "map4a1c588e": {
       "accessType": "AuthorizedUsers",
       "dependsOn": [
         {
@@ -108,7 +105,7 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "web1b7b454d"
+          "resourceName": "web27eb814a"
         }
       ],
       "isDefault": true,

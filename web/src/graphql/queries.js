@@ -10,8 +10,10 @@ export const listSensors = /* GraphQL */ `
       geo {
         latitude
         longitude
+        __typename
       }
       status
+      __typename
     }
   }
 `;
@@ -28,6 +30,7 @@ export const getSensorValue = /* GraphQL */ `
       timestamp
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -49,8 +52,10 @@ export const listSensorValues = /* GraphQL */ `
         timestamp
         createdAt
         updatedAt
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;

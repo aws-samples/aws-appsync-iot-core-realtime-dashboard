@@ -1,12 +1,12 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "bayhealth": {
+    "sensorsapi": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string"
     }
   },
   "auth": {
-    "web1b7b454d": {
+    "web27eb814a": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",
@@ -33,7 +33,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "geo": {
-    "map0102348f": {
+    "map4a1c588e": {
       "Arn": "string",
       "Name": "string",
       "Region": "string",

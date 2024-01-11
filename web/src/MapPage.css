@@ -1,3 +1,5 @@
+body { margin: 0; padding: 0; }
+
 #container {
     height: 100%;
 }
@@ -10,7 +12,7 @@
 #banner {
     position: absolute;
     width: 100%;
-    font-size: 25px;
+    font: 2em sans-serif;
     padding: 12px;
     color: #ffffff;
     opacity: 75%;

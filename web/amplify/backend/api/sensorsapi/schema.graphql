@@ -1,6 +1,6 @@
 type SensorValue @model @auth(rules:[
-  { allow: private, provider: iam  },
-  { allow: private, provider: userPools  }
+  { allow: private, provider: iam },
+  { allow: private, provider: userPools }
   ]) 
 {
   id: ID!

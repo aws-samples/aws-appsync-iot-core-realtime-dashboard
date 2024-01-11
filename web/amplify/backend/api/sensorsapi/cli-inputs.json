@@ -1,16 +1,17 @@
 {
   "version": 1,
   "serviceConfiguration": {
-    "apiName": "bayhealth",
+    "apiName": "sensorsapi",
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authweb1b7b454d"
+      "cognitoUserPoolId": "authweb27eb814a"
     },
     "additionalAuthTypes": [
       {
         "mode": "AWS_IAM"
       }
-    ]
+    ],
+    "conflictResolution": {}
   }
 }

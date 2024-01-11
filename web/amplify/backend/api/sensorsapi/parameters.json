@@ -1,11 +1,12 @@
 {
-  "AppSyncApiName": "bayhealth",
+  "AppSyncApiName": "sensorsapi",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
   "AuthCognitoUserPoolId": {
     "Fn::GetAtt": [
-      "authweb1b7b454d",
+      "authweb27eb814a",
       "Outputs.UserPoolId"
     ]
-  }
+  },
+  "AuthModeLastUpdated": "2024-01-10T23:51:22.220Z"
 }

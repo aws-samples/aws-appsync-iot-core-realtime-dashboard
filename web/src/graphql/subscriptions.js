@@ -16,6 +16,7 @@ export const onCreateSensorValue = /* GraphQL */ `
       timestamp
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -34,6 +35,7 @@ export const onUpdateSensorValue = /* GraphQL */ `
       timestamp
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -52,6 +54,7 @@ export const onDeleteSensorValue = /* GraphQL */ `
       timestamp
       createdAt
       updatedAt
+      __typename
     }
   }
 `;

@@ -1,6 +1,6 @@
 /* Amplify Params - DO NOT EDIT
-	API_BAYHEALTH_GRAPHQLAPIENDPOINTOUTPUT
-	API_BAYHEALTH_GRAPHQLAPIIDOUTPUT
+	API_SENSORSAPI_GRAPHQLAPIENDPOINTOUTPUT
+	API_SENSORSAPI_GRAPHQLAPIIDOUTPUT
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
@@ -11,25 +11,25 @@ import { SignatureV4 } from '@aws-sdk/signature-v4';
 import { HttpRequest } from '@aws-sdk/protocol-http';
 import { default as fetch, Request } from 'node-fetch';
 
-const GRAPHQL_ENDPOINT = process.env.API_BAYHEALTH_GRAPHQLAPIENDPOINTOUTPUT;
-const REGION = process.env.REGION || 'us-east-1';
+const GRAPHQL_ENDPOINT = process.env.API_SENSORSAPI_GRAPHQLAPIENDPOINTOUTPUT;
+const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
 const { Sha256 } = crypto;
 
 const query = /* GraphQL */ `
-  mutation CreateSensorValue ($input: CreateSensorValueInput!) {
-    createSensorValue(input: $input) {
-      id
-      sensorId
-      pH
-      temperature
-      salinity
-      disolvedO2
-      status
-      timestamp
-      createdAt
-      updatedAt
-    }
+mutation CreateSensorValue ($input: CreateSensorValueInput!) {
+  createSensorValue(input: $input) {
+    id
+    sensorId
+    pH
+    temperature
+    salinity
+    disolvedO2
+    status
+    timestamp
+    createdAt
+    updatedAt
   }
+}
 `;
 
 /**
@@ -59,7 +59,7 @@ const query = /* GraphQL */ `
 
   const signer = new SignatureV4({
     credentials: defaultProvider(),
-    region: REGION,
+    region: AWS_REGION,
     service: 'appsync',
     sha256: Sha256
   });
@@ -85,13 +85,9 @@ const query = /* GraphQL */ `
   try {
     response = await fetch(request);
     body = await response.json();
-
-    console.log(`RESPONSE: ${JSON.stringify(response)}`);
-    console.log(`BODY: ${JSON.stringify(body)}`);
-
+    console.log(body)
     if (body.errors) statusCode = 400;
   } catch (error) {
-    console.log(`ERROR: ${JSON.stringify(error)}`);
     statusCode = 500;
     body = {
       errors: [
@@ -104,6 +100,11 @@ const query = /* GraphQL */ `
 
   return {
     statusCode,
+    //  Uncomment below to enable CORS requests
+    // headers: {
+    //   "Access-Control-Allow-Origin": "*",
+    //   "Access-Control-Allow-Headers": "*"
+    // }, 
     body: JSON.stringify(body)
   };
 };

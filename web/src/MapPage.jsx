@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { API, graphqlOperation } from 'aws-amplify';
-import { listSensors } from './graphql/queries';
-import { onCreateSensorValue } from './graphql/subscriptions';
+
+import { useEffect } from 'react';
 import { createMap } from "maplibre-gl-js-amplify";
 import { Marker } from 'maplibre-gl';
+import { generateClient } from 'aws-amplify/api';
+import { listSensors } from './graphql/queries';
+import { onCreateSensorValue } from './graphql/subscriptions';
 
 import "maplibre-gl/dist/maplibre-gl.css";
 import './MapPage.css';
-
 
 const MapPage = () => {
 
@@ -31,7 +31,9 @@ const MapPage = () => {
         // call api to get list of sensors and display them as markers on the map
         async function DisplaySensors(map) {
 
-            const response = await API.graphql(graphqlOperation(listSensors))
+            const client = generateClient();
+            const response = await client.graphql({ query: listSensors})
+            console.log('API Response:', response)
 
             if (response && response.data) {
 
@@ -40,8 +42,9 @@ const MapPage = () => {
                 response.data.listSensors.forEach((sensor) => {
 
                     var marker = CreateSensorMarker(sensor)
-
-                    new Marker(marker)
+                    console.log(marker)
+                    console.log(sensor)
+                    new Marker({element: marker})
                         .setLngLat([sensor.geo.longitude, sensor.geo.latitude])
                         .addTo(map);
                 })
@@ -55,8 +58,8 @@ const MapPage = () => {
                 map = await createMap({
                     container: "map",
                     center: [-122.2000, 37.70500],
-                    zoom: 11,
-                    maxZoom: 11
+                    zoom: 10,
+                    maxZoom: 10
                 })
 
                 map.repaint = true;
@@ -72,7 +75,6 @@ const MapPage = () => {
         }
 
         initializeMap();
-
     }, []);
 
     // start subscription for sensor status changes and update sensor marker color
@@ -103,16 +105,18 @@ const MapPage = () => {
             }
         }
 
-        API.graphql(graphqlOperation(onCreateSensorValue)).subscribe({
-            next: (response) => {
-                console.log('sensor subscription value received')
-                UpdateSensorMarker(response.value.data.onCreateSensorValue.sensorId, response.value.data.onCreateSensorValue.status)
-            },
-            error: (error) => console.warn(error),
+        const client = generateClient();
+        const createSub = client
+            .graphql({ query: onCreateSensorValue })
+            .subscribe({
+                next: ({ data }) => {
+                    UpdateSensorMarker(data.onCreateSensorValue.sensorId, data.onCreateSensorValue.status)
+                },
+                error: (error) => console.warn(error)
         });
         
     }, []);
-
+    
     return (
         <div id='container'>
             <div id='banner'>Bay Health</div>

@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.6.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.10.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -16,13 +16,13 @@
     "s3Key": {
       "Type": "String"
     },
-    "apibayhealthGraphQLAPIIdOutput": {
+    "apisensorsapiGraphQLAPIIdOutput": {
       "Type": "String",
-      "Default": "apibayhealthGraphQLAPIIdOutput"
+      "Default": "apisensorsapiGraphQLAPIIdOutput"
     },
-    "apibayhealthGraphQLAPIEndpointOutput": {
+    "apisensorsapiGraphQLAPIEndpointOutput": {
       "Type": "String",
-      "Default": "apibayhealthGraphQLAPIEndpointOutput"
+      "Default": "apisensorsapiGraphQLAPIEndpointOutput"
     }
   },
   "Conditions": {
@@ -78,11 +78,11 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "API_BAYHEALTH_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apibayhealthGraphQLAPIIdOutput"
+            "API_SENSORSAPI_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apisensorsapiGraphQLAPIIdOutput"
             },
-            "API_BAYHEALTH_GRAPHQLAPIENDPOINTOUTPUT": {
-              "Ref": "apibayhealthGraphQLAPIEndpointOutput"
+            "API_SENSORSAPI_GRAPHQLAPIENDPOINTOUTPUT": {
+              "Ref": "apisensorsapiGraphQLAPIEndpointOutput"
             }
           }
         },
@@ -92,7 +92,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
         "Layers": [],
         "Timeout": 25
       }
@@ -103,12 +103,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "webLambdaRole9722b7c1",
+            "webLambdaRolea1ec2e0d",
             {
               "Fn::Join": [
                 "",
                 [
-                  "webLambdaRole9722b7c1",
+                  "webLambdaRolea1ec2e0d",
                   "-",
                   {
                     "Ref": "env"
@@ -214,7 +214,7 @@
                       },
                       ":apis/",
                       {
-                        "Ref": "apibayhealthGraphQLAPIIdOutput"
+                        "Ref": "apisensorsapiGraphQLAPIIdOutput"
                       },
                       "/types/Query/*"
                     ]
@@ -234,7 +234,7 @@
                       },
                       ":apis/",
                       {
-                        "Ref": "apibayhealthGraphQLAPIIdOutput"
+                        "Ref": "apisensorsapiGraphQLAPIIdOutput"
                       },
                       "/types/Mutation/*"
                     ]
@@ -254,7 +254,7 @@
                       },
                       ":apis/",
                       {
-                        "Ref": "apibayhealthGraphQLAPIIdOutput"
+                        "Ref": "apisensorsapiGraphQLAPIIdOutput"
                       },
                       "/types/Subscription/*"
                     ]
