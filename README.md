@@ -150,7 +150,7 @@ published to telemetry topic dt/bay-health/SF/sensor-sf-north/sensor-value {"pH"
 Switch back to the terminal window pointing to the **web** folder and run:
 
 ```
-$ npm start
+$ npm run dev
 ```
 
 This will launch the application in your machine's default web browser.
