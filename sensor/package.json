@@ -11,6 +11,6 @@
   "dependencies": {
     "@aws-sdk/client-iot": "^3.496.0",
     "argparse": "^2.0.1",
-    "aws-iot-device-sdk": "^2.2.13"
+    "aws-iot-device-sdk": "^2.2.15"
   }
 }
