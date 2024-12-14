@@ -46,3 +46,8 @@ amplifytools.xcconfig
 #amplify-do-not-edit-end
 
 team-provider-info.json
+
+# amplify
+.amplify
+amplify_outputs*
+amplifyconfiguration*
