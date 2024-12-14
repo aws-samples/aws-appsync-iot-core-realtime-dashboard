@@ -11,11 +11,11 @@
       "longitude": -122.200682
     },
     "settings": {
-      "host": "a7xm45onti3g0-ats.iot.us-east-1.amazonaws.com",
-      "keyPath": "./certs/sensor-sf-east-private.pem.key",
-      "certPath": "./certs/sensor-sf-east-certificate.pem.crt",
-      "caPath": "./certs/AmazonRootCA1.pem",
-      "certificateArn": "arn:aws:iot:us-east-1:224461513283:cert/9b189de9b2393d67e2289b2603d9329b107e3d0b19c6095a7a428582d94fe097",
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
       "clientId": "sensor-sf-east"
     }
   },
@@ -31,11 +31,11 @@
       "longitude": -122.162933
     },
     "settings": {
-      "host": "a7xm45onti3g0-ats.iot.us-east-1.amazonaws.com",
-      "keyPath": "./certs/sensor-sf-southeast-private.pem.key",
-      "certPath": "./certs/sensor-sf-southeast-certificate.pem.crt",
-      "caPath": "./certs/AmazonRootCA1.pem",
-      "certificateArn": "arn:aws:iot:us-east-1:224461513283:cert/6c3b2e60c485eb5cfc26c18def480671370d07603e78cedd4192ffffafb9abf3",
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
       "clientId": "sensor-sf-southeast"
     }
   },
@@ -51,11 +51,11 @@
       "longitude": -122.338036
     },
     "settings": {
-      "host": "a7xm45onti3g0-ats.iot.us-east-1.amazonaws.com",
-      "keyPath": "./certs/sensor-sf-southwest-private.pem.key",
-      "certPath": "./certs/sensor-sf-southwest-certificate.pem.crt",
-      "caPath": "./certs/AmazonRootCA1.pem",
-      "certificateArn": "arn:aws:iot:us-east-1:224461513283:cert/3f4fa1b5e1f513e5faef684311367a7edd3859e8de24d3a5119c617dfd453a38",
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
       "clientId": "sensor-sf-southwest"
     }
   },
@@ -71,11 +71,11 @@
       "longitude": -122.36549
     },
     "settings": {
-      "host": "a7xm45onti3g0-ats.iot.us-east-1.amazonaws.com",
-      "keyPath": "./certs/sensor-sf-west-private.pem.key",
-      "certPath": "./certs/sensor-sf-west-certificate.pem.crt",
-      "caPath": "./certs/AmazonRootCA1.pem",
-      "certificateArn": "arn:aws:iot:us-east-1:224461513283:cert/c80f68623f6750f97c2b90f963302566c2249832232e35a5e5d8d69c682a7fea",
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
       "clientId": "sensor-sf-west"
     }
   },
@@ -91,11 +91,11 @@
       "longitude": -122.359999
     },
     "settings": {
-      "host": "a7xm45onti3g0-ats.iot.us-east-1.amazonaws.com",
-      "keyPath": "./certs/sensor-sf-northwest-private.pem.key",
-      "certPath": "./certs/sensor-sf-northwest-certificate.pem.crt",
-      "caPath": "./certs/AmazonRootCA1.pem",
-      "certificateArn": "arn:aws:iot:us-east-1:224461513283:cert/f1e1c3c10ce4f628e5ad40a83a502faa707c18e75794b460577adb1a25ba4893",
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
       "clientId": "sensor-sf-northwest"
     }
   },
@@ -111,11 +111,11 @@
       "longitude": -122.354788
     },
     "settings": {
-      "host": "a7xm45onti3g0-ats.iot.us-east-1.amazonaws.com",
-      "keyPath": "./certs/sensor-sf-north-private.pem.key",
-      "certPath": "./certs/sensor-sf-north-certificate.pem.crt",
-      "caPath": "./certs/AmazonRootCA1.pem",
-      "certificateArn": "arn:aws:iot:us-east-1:224461513283:cert/e577f478ffb5b78dbdc7e2a7ea4e9c46ef7b070404d35ac89f730203deb1ce7b",
+      "host": "",
+      "keyPath": "",
+      "certPath": "",
+      "caPath": "",
+      "certificateArn": "",
       "clientId": "sensor-sf-north"
     }
   }
