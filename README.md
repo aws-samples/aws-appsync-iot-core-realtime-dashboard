@@ -83,7 +83,7 @@ From the app's **sensor** folder:
 
 ```
 npm install
-node create-sensors.js [--profile] [--region]
+node create-sensors.js
 ```
 
 _Note - the profile and region arguments are optional. If not specified the app will create the sensors using your default AWS Profile in us-east-1_
@@ -139,7 +139,7 @@ npx ampx sandbox delete
 From the **sensor** folder:
 
 ```
-node delete-sensors.js [--profile] [--region]
+node delete-sensors.js
 ```
 
 _Note - the profile and region arguments are optional. If not specified the app will delete the sensors using your default AWS Profile in us-east-1_
