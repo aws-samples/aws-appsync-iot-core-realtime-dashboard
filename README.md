@@ -50,7 +50,7 @@ cd aws-appsync-iot-core-realtime-dashboard/web
 npm install
 ```
 
-**Deploy the Infrastructure with Apmlify Gen2**
+**Deploy the Infrastructure with Amplify Gen2**
 
 ```
 npx ampx sandbox
