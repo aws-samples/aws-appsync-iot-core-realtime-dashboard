@@ -30,7 +30,7 @@ The following software was used in the development of this application. While it
 
 2. [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) (v2.15.3) the AWS Command Line Interface (CLI) is used to configure your connection credentials to AWS. These credentials are used by the CDK, Amplify, and the CLI.
 
-3. [Node.js](https://nodejs.org/en/download/) (v18.19.0) with NPM (v10.1.0)
+3. [Node.js](https://nodejs.org/en/download/) (v20.x or later) with NPM (v10.x or later)
 
 ## **Installation**
 
